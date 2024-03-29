@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Railway.Infrastructure.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Railway.Infrastructure.Data.Configurations;
 
@@ -9,7 +7,7 @@ namespace Railway.Infrastructure.Data.Configurations;
 /// Configurations for Route entity.
 /// The relationship with RouteDetail is configured in <see cref="RouteDetailConfiguration">
 /// The relationship with RouteStop is configured in <see cref="RouteStopConfiguration">
-/// The relationship with Schhedule is configured in <see cref="SchheduleConfiguration">
+/// The relationship with Schhedule is configured in <see cref="ScheduleConfiguration">
 /// </summary>
 public class RouteConfiguration : BaseEntityConfiguration<Route>
 {
