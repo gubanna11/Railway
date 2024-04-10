@@ -12,7 +12,7 @@ public class RouteDetail : BaseEntity
 
     public double Price { get; set; }
 
-    public int Amount { get; set; }
+    public int CoachesAmount { get; set; }
 
     public ICollection<RouteSeat> RouteSeats { get; set; }
 }

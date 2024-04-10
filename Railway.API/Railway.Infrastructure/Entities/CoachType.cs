@@ -9,4 +9,6 @@ public class CoachType : BaseEntity
     public int SeatsAmount { get; set; }
 
     public ICollection<RouteDetail> RouteDetails { get; set; }
+
+    public ICollection<TrainTypeDetail> TrainTypeDetails { get; set; }
 }

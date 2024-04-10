@@ -26,8 +26,6 @@ public class Route : BaseEntity
 
     public double Distance { get; set; }
 
-    public int CoachesAmount { get; set; }
-
     public bool IsArchived { get; set; }
 
     public string Comment { get; set; }

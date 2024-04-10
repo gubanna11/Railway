@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Railway.Infrastructure.Entities;
 
@@ -23,4 +24,6 @@ public class Ticket : BaseEntity
 
     public int ScheduleId { get; set; }
     public Schedule Schedule { get; set; }
+
+    public ICollection<TicketOption> TicketOptions { get; set; }
 }

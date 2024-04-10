@@ -11,5 +11,7 @@ public class RouteSeat : BaseEntity
 
     public int CoachNumber { get; set; }
 
+    public bool IsArchived { get; set; }
+
     public ICollection<Ticket> Tickets { get; set; }
 }

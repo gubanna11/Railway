@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Railway.Infrastructure.Entities;
 
 namespace Railway.Infrastructure.Data.Configurations;
@@ -13,10 +14,8 @@ public class ScheduleConfiguration : BaseEntityConfiguration<Schedule>
     {
         base.Configure(builder);
 
-        // relations with Frequency
-        builder.HasOne(s => s.Frequency)
-            .WithMany(f => f.Schedules)
-            .HasForeignKey(s => s.FrequencyId);
+        builder.Property(s => s.Frequency)
+            .HasColumnType("nvarchar(50)");
 
         // relation with Route
         builder.HasOne(s => s.Route)

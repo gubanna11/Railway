@@ -5,6 +5,7 @@ namespace Railway.Infrastructure.Data.Configurations;
 
 /// <summary>
 /// Configurations for Ticket entity.
+/// The relationship with TicketOption is configured in <see cref="TicketOptionConfiguration">
 /// </summary>
 public class TicketConfiguration : BaseEntityConfiguration<Ticket>
 {
