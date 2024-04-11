@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Railway.Infrastructure.Abstract.Interfaces;
+using Railway.Infrastructure.Abstract;
 using Railway.Infrastructure.Data;
 using Railway.Infrastructure.Entities;
 
@@ -13,6 +15,7 @@ public static class Dependencies
         IConfiguration configuration)
     {
         services.ConfigureDatabase(configuration);
+        services.ConfigureUnitOfWork();
 
         return services;
     }
@@ -25,5 +28,11 @@ public static class Dependencies
         services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
+    }
+
+    private static void ConfigureUnitOfWork(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
     }
 }
