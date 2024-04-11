@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Railway.Infrastructure.Abstract.Interfaces;
-using Railway.Infrastructure.Abstract;
-using Railway.Infrastructure.Data;
-using Railway.Infrastructure.Entities;
+using Railway.Core.Abstract.Interfaces;
+using Railway.Core.Abstract;
+using Railway.Core.Data;
+using Railway.Core.Entities;
 
 namespace Railway.Dependencies;
 

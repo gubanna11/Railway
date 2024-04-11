@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Railway.Core\Railway.Core.csproj" />
     <ProjectReference Include="..\Railway.Infrastructure\Railway.Infrastructure.csproj" />
   </ItemGroup>
 
