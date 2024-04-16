@@ -2,10 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Railway.Core.Abstract.Interfaces;
 using Railway.Core.Abstract;
+using Railway.Core.Abstract.Interfaces;
 using Railway.Core.Data;
 using Railway.Core.Entities;
+using Railway.Infrastructure.Mapping;
+using Railway.Infrastructure.Services;
+using Railway.Infrastructure.Services.Interfaces;
 
 namespace Railway.Dependencies;
 
@@ -16,6 +19,9 @@ public static class Dependencies
     {
         services.ConfigureDatabase(configuration);
         services.ConfigureUnitOfWork();
+        services.ConfigureMapper();
+
+        services.ConfigureServices();
 
         return services;
     }
@@ -34,5 +40,17 @@ public static class Dependencies
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+    }
+
+    private static void ConfigureMapper(this IServiceCollection services)
+    {
+        services.AddAutoMapper(typeof(DataProfile));
+    }
+
+    private static void ConfigureServices(this IServiceCollection services)
+    {
+        services.AddScoped<IRoutesService, RoutesService>();
+        services.AddScoped<ITrainsService, TrainsService>();
+        services.AddScoped<ITrainTypesService, TrainTypesService>();
     }
 }

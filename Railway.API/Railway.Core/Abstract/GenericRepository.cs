@@ -2,11 +2,8 @@
 using Railway.Core.Abstract.Interfaces;
 using Railway.Core.Data;
 using Railway.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Railway.Core.Abstract;
 
@@ -38,14 +35,20 @@ public class GenericRepository<T> : IGenericRepository<T>
         Func<IQueryable<T>, IOrderedEnumerable<T>> orderBy = null,
         params Expression<Func<T, object>>[] includeProperties)
     {
-        IQueryable<T> query = Set;
+        IQueryable<T> query = _context.Set<T>();
 
         if (filter != null)
         {
             query = query.Where(filter);
         }
 
-        query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        //query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty))
+        //    .AsSplitQuery();
+
+        foreach (var includeProperty in includeProperties)
+        {
+            query = query.Include(includeProperty);
+        }
 
         if (orderBy != null)
         {

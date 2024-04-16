@@ -12,13 +12,13 @@ public class RouteStop : BaseEntity
 
     public int Order { get; set; }
 
-    public TimeOnly? ArrivalTime { get; set; }
+    public TimeSpan? ArrivalTime { get; set; }
 
     public int StopHours { get; set; }
 
     public int StopMinutes { get; set; }
 
-    public TimeOnly? DepartureTime { get; set; }
+    public TimeSpan? DepartureTime { get; set; }
 
     public int InTheWayHours { get; set; }
     

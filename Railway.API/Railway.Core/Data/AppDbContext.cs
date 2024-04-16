@@ -11,6 +11,8 @@ public class AppDbContext : IdentityDbContext<User>
 
     public DbSet<Train> Trains { get; set; }
 
+    public DbSet<TrainTypeDetail> TrainTypeDetails { get; set; }
+
     public DbSet<Station> Stations { get; set; }
 
     public DbSet<StationTrack> StationTracks { get; set; }

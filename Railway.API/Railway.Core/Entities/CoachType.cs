@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Railway.Core.Entities;
+﻿namespace Railway.Core.Entities;
 
 public class CoachType : BaseEntity
 {

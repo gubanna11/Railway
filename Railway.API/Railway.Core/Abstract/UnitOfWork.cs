@@ -1,7 +1,6 @@
 ﻿using Railway.Core.Abstract.Interfaces;
 using Railway.Core.Data;
 using Railway.Core.Entities;
-using System.Threading.Tasks;
 
 namespace Railway.Core.Abstract;
 
@@ -17,7 +16,12 @@ public class UnitOfWork<T> : IUnitOfWork<T> where T : BaseEntity
     }
 
     IGenericRepository<T> IUnitOfWork<T>.GenericRepository => _genericRepository;
-    
+
+    public IGenericRepository<Type> GetGenericRepository<Type>() where Type : BaseEntity
+    {
+        return new GenericRepository<Type>(_context);
+    }
+
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
