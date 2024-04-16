@@ -1,0 +1,40 @@
+<div>
+    <p>Train types:</p>
+    <div *ngFor="let type of trainTypes">
+        <p (click)="setTrainType(type)" style="cursor: pointer;" [class.active]="selectedType == type">{{type.name}}</p>
+    </div>
+</div>
+
+<div *ngIf="createRouteDto">
+    <div>
+        <label>Train</label>
+        <div *ngFor="let train of trains">
+            <div (click)="selectTrain(train)">
+                {{train.number}}
+                <p [class.active]="train.id == createRouteDto.trainId"></p>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;" *ngFor="let detail of createRouteDto.routeDetails">
+        <div>{{detail.coachTypeId}}</div>
+        <input type="number" [(ngModel)]="detail.coachesAmount">
+    </div>
+    <div>
+        <label>number:</label>
+        <input type="text" [(ngModel)]="createRouteDto.number">
+    </div>
+    <button type="submit" (click)="createRoute()">submit</button>
+
+    <!-- from, to, time -->
+
+    <div>
+        <p>From locality:</p>
+        <select></select>
+    </div>
+
+    <p><span (click)="addSchedule()" style="cursor: pointer;">Add Schedule</span> or <span style="font-weight: bold;">Skip</span></p>
+
+    <div *ngIf="createRouteDto.schedules" >
+        <p>hello</p>
+    </div>
+</div>
