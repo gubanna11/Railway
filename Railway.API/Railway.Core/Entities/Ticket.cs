@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Railway.Core.Entities;
+﻿namespace Railway.Core.Entities;
 
 public class Ticket : BaseEntity
 {
@@ -13,8 +10,6 @@ public class Ticket : BaseEntity
 
     public int TicketTypeId { get; set; }
     public TicketType TicketType { get; set; }
-
-    public double UnitPrice { get; set; }
 
     public double TotalPrice { get; set; }
 

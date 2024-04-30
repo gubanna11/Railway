@@ -28,9 +28,6 @@ public class RoutesService : IRoutesService
     {
         Route route = _mapper.Map<Route>(createRouteDto);
 
-        route.FromStationTrackId = 1;
-        route.ToStationTrackId = 2;
-
         await _unitOfWork.GenericRepository.AddAsync(route);
         await _unitOfWork.SaveAsync();
 
@@ -41,6 +38,13 @@ public class RoutesService : IRoutesService
             await _unitOfWork.GetGenericRepository<RouteDetail>().AddAsync(newDetail);
         }
 
+        foreach (var stop in createRouteDto.RouteStops)
+        {
+            var newStop = _mapper.Map<RouteStop>(stop);
+            newStop.RouteId = route.Id;
+            await _unitOfWork.GetGenericRepository<RouteStop>().AddAsync(newStop);
+        }
+
         await _unitOfWork.SaveAsync();
 
         return _mapper.Map<RouteDto>(route);
@@ -48,22 +52,13 @@ public class RoutesService : IRoutesService
 
     public IEnumerable<RouteDto> GetAll()
     {
-        //var routes = _unitOfWork.GenericRepository.GetAll(null, null,
-        //    r => r.Train,
-        //    r => r.RouteStops,
-        //    r => r.RouteDetails
-        //    );
-        //r => r.FromStationTrack.Station,
-        //r => r.ToStationTrack.Station);
+        var routes = _unitOfWork.GenericRepository.GetAll(
+            null,
+            null,
+            r => r.Train, r => r.RouteStops);
 
-        //var routes = _unitOfWork.GenericRepository.Set
-        //    .Include(x => x.Train)            
-        //    //.AsSplitQuery()
-        //    .ToList();
-        //var routes3 = _unitOfWork.GenericRepository.Set.AsSingleQuery().ToList();
-
-
-        //var routes = _unitOfWork.GenericRepository.Set.Select(
+        //var routes =  _unitOfWork.GenericRepository.Set
+        //    .Select(
         //    r => new RouteDto
         //    {
         //        Id = r.Id,
@@ -72,20 +67,7 @@ public class RoutesService : IRoutesService
         //        RouteStops = r.RouteStops
         //    });
 
-
-        var routes2 = _unitOfWork.GenericRepository.GetAll(null, null, r => r.Train, r => r.RouteStops);
-
-        var routes =  _unitOfWork.GenericRepository.Set
-            .Select(
-            r => new RouteDto
-            {
-                Id = r.Id,
-                Train = r.Train,
-                //TrainType
-                RouteStops = r.RouteStops
-            });
-
-        return routes;
-        //return _mapper.Map<IEnumerable<RouteDto>>(routes);
+        //return routes;
+        return _mapper.Map<IEnumerable<RouteDto>>(routes);
     }
 }

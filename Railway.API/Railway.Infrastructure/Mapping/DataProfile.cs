@@ -11,10 +11,16 @@ public class DataProfile : Profile
     public DataProfile()
     {
         CreateMap<CreateRouteDto, Route>()
-            .ForMember(dest => dest.RouteDetails, opt => opt.Ignore());
+            .ForMember(dest => dest.RouteDetails, opt => opt.Ignore())
+            .ForMember(dest => dest.RouteStops, opt => opt.Ignore())
+            .ForMember(dest => dest.FromStationTrack, opt => opt.Ignore())
+            .ForMember(dest => dest.ToStationTrack, opt => opt.Ignore());
 
-        CreateMap<Route, RouteDto>()
-            .ReverseMap();
+
+        CreateMap<Route, RouteDto>();
+
+        CreateMap<CreateRouteStopDto, RouteStop>()
+            .ForMember(dest => dest.StationTrack, opt => opt.Ignore());
 
         CreateMap<CreateRouteDetailDto, RouteDetail>();
 
@@ -24,5 +30,11 @@ public class DataProfile : Profile
         CreateMap<TrainType, TrainTypeDto>()
            .ForMember(dest => dest.CoachTypes, s => s.MapFrom(s => s.TrainTypeDetails.Select(td => td.CoachType)))
            .ReverseMap();
+
+        CreateMap<Locality, LocalityDto>()
+            .ReverseMap();
+
+        CreateMap<Station, StationDto>()
+            .ReverseMap();
     }
 }

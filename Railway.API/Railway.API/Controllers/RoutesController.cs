@@ -32,7 +32,7 @@ public class RoutesController : ControllerBase
             return Ok(new
             {
                 Message = "Route was added successfully!",
-                Route = routeDto
+                Route = newRouteDto
             });
         }
 

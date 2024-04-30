@@ -1,0 +1,31 @@
+﻿using Railway.Core.Entities;
+using System;
+
+namespace Railway.Infrastructure.Dtos.CreateDtos;
+
+public class CreateRouteStopDto
+{
+    public int RouteId { get; set; }
+    public RouteDto Route { get; set; }
+
+    public int StationTrackId { get; set; }
+    public StationTrack StationTrack { get; set; }
+
+    public int Order { get; set; }
+
+    public TimeSpan? ArrivalTime { get; set; }
+
+    public int StopHours { get; set; }
+
+    public int StopMinutes { get; set; }
+
+    public TimeSpan? DepartureTime { get; set; }
+
+    public int InTheWayHours { get; set; }
+
+    public int InTheWayMinutes { get; set; }
+
+    public bool IsArchived { get; set; }
+
+    public string Comment { get; set; }
+}

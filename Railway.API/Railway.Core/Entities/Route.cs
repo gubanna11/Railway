@@ -32,7 +32,7 @@ public class Route : BaseEntity
 
     public ICollection<RouteDetail> RouteDetails { get; set; }
 
-    public ICollection<Schedule> Schedules { get; set; }
+    public ICollection<Schedule>? Schedules { get; set; }
 
     public ICollection<RouteStop> RouteStops { get; set; }
 }
