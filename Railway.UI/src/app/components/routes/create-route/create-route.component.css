@@ -1,7 +1,15 @@
-input{
+/* input{
     padding: 12px 18px;
-}
+} */
 
 .active{
     border: 4px solid #000;
+}
+
+.dropdown {
+    display: flex;
+}
+
+.child-station-dropdown{
+    display: flex;
 }

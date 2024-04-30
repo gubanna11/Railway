@@ -1,7 +1,21 @@
+import { StationTrackDto } from "../stations/stationDto";
 
 export class CreateRouteStopDto {
-    routeId?: number;
-    stationId?: number;
-    trackId?: number;
-    //
+    stationTrackId?: number;
+    stationTrack?: StationTrackDto;
+    
+    departureTime?: string;
+    arrivalTime?: string;
+
+    stopHours?: number;
+    stopMinutes?: number;
+
+    distance?: number;
+
+    inTheWayHours?: number;
+    inTheWayMinutes?: number;
+
+    order?: number;
+
+    comment?: string;
 }

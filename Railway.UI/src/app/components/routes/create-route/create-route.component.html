@@ -15,26 +15,82 @@
             </div>
         </div>
     </div>
-    <div style="display: flex;" *ngFor="let detail of createRouteDto.routeDetails">
-        <div>{{detail.coachTypeId}}</div>
-        <input type="number" [(ngModel)]="detail.coachesAmount">
+    <div style="display: flex; gap: 24px" *ngFor="let detail of createRouteDto.routeDetails; let i = index">
+        <div>
+            <label>{{coachTypes![i].name}} amount</label>
+            <input type="number" [(ngModel)]="detail.coachesAmount">
+        </div>
+        <div>
+            <label>price:</label>
+            <input type="number" [(ngModel)]="detail.price">
+        </div>
     </div>
     <div>
         <label>number:</label>
         <input type="text" [(ngModel)]="createRouteDto.number">
     </div>
-    <button type="submit" (click)="createRoute()">submit</button>
-
     <!-- from, to, time -->
+    <div class="dropdown">
+        <p>From:</p>
+        <app-localities class="child-station-dropdown" (setStationTrack)="fromStationTrack($event)"></app-localities>
+    </div>
+    <div class="dropdown">
+        <p>To:</p>
+        <app-localities class="child-station-dropdown" (setStationTrack)="toStationTrack($event)"></app-localities>
+    </div>
 
     <div>
-        <p>From locality:</p>
-        <select></select>
+        <label>Departure time:</label>
+        <input type="time" [(ngModel)]="createRouteDto.departureTime">
     </div>
 
-    <p><span (click)="addSchedule()" style="cursor: pointer;">Add Schedule</span> or <span style="font-weight: bold;">Skip</span></p>
-
-    <div *ngIf="createRouteDto.schedules" >
-        <p>hello</p>
+    <div>
+        <label>Arrival time:</label>
+        <input type="time" [(ngModel)]="createRouteDto.arrivalTime">
     </div>
+
+    <div>
+        <label>Distance:</label>
+        <input type="number" [(ngModel)]="createRouteDto.distance">
+    </div>
+
+    <div>
+        <p (click)="addSchedule()" style="cursor: pointer;">Add Schedule</p>
+
+        <div *ngIf="createRouteDto.schedules">
+            <p>hello</p>
+        </div>
+    </div>
+
+
+    <div>
+        <label>Comment: </label>
+        <textarea [(ngModel)]="createRouteDto.comment"></textarea>
+    </div>
+
+    <button type="submit" (click)="createRoute()">submit</button>
 </div>
+
+
+<p><span (click)="showRouteStops()">Add route stops</span><span (click)="navigateToHome()"
+        style="font-weight: bold;">Skip</span></p>
+<div *ngIf="isRouteStops">
+    <app-create-stops [stops]="createRouteDto.routeStops">
+
+    </app-create-stops>
+    <p (click)="isRouteStops = false">Back</p>
+</div>
+
+
+<!-- locality-autocomplete.component.html -->
+<!-- <div>
+    <p>From locality:</p>
+    <mat-form-field>
+    <input type="text" placeholder="Locality" matInput [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let locality of localities" [value]="locality">
+        {{ locality.name }}
+        </mat-option>
+    </mat-autocomplete>
+    </mat-form-field>
+</div> -->

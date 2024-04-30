@@ -16,6 +16,6 @@ export class TrainsService {
   ) { }
 
   getTrainsByTypeId(typeId?: number): Observable<TrainDto[]> {
-    return this.http.get<TrainDto[]>(`${environment.apiUrl}/${this.url}/type/${typeId}`);
+    return this.http.get<TrainDto[]>(`${environment.apiUrl}/${this.url}?typeId=${typeId}`);
   }
 }

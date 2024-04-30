@@ -1,0 +1,45 @@
+<button (click)="addNewStop()">+</button>
+<div *ngFor="let stop of stops; let i = index">
+
+    <app-stop [stop]="stop" (addStop)="setRouteStop($event, i)"></app-stop>    
+
+    <div>
+        <label>Arrival time: </label>
+        <input type="time" [(ngModel)]="stop.arrivalTime">
+    </div>
+
+    <div>
+        <label>Stop hours: </label>
+        <input max="23" min="0" type="number" (change)="setStopTime(stop)" [(ngModel)]="stop.stopHours">
+    </div>
+
+    <div>
+        <label>Stop minutes: </label>
+        <input max="59" min="0" (change)="setStopTime(stop)" type="number" [(ngModel)]="stop.stopMinutes">
+    </div>
+
+    <div>
+        <label>Departure time: </label>
+        <input type="time" [(ngModel)]="stop.departureTime">
+    </div>
+</div> 
+
+<!-- <ng-container *ngIf="stops && stops.length > 0;">
+    <app-stop [stop]="stops[0]" readonly="true"></app-stop>
+</ng-container>
+
+
+<div *ngFor="let stop of stops; let i = index">
+
+    <app-stop [stop]="stop" *ngIf="i !== 0 && stops && i !== stops.length - 1" (addStop)="setRouteStop($event, i)"></app-stop>
+    
+
+</div> 
+
+   <button (click)="addNewStop()">+</button>
+
+<ng-container *ngIf="stops && stops.length > 1;">
+    <app-stop [stop]="stops[stops.length - 1]" readonly="true"></app-stop>
+</ng-container> -->
+
+<button (click)="setRouteStops()">Finish</button>
