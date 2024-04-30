@@ -14,7 +14,7 @@ import { CreateRouteStopDto } from '../../../models/routeStops/createRouteStopDt
   styleUrl: './create-route.component.css'
 })
 export class CreateRouteComponent implements OnInit {
-  id:string = 's';
+  id: string = 's';
   createRouteDto!: CreateRouteDto;
   trainTypes?: TrainTypeDto[];
   trains?: TrainDto[];
@@ -86,26 +86,27 @@ export class CreateRouteComponent implements OnInit {
         next: (route) => {
           console.log(route);
         },
-        error: (err) => { console.log(err);
+        error: (err) => {
+          console.log(err);
         },
       });
   }
 
-  fromStationTrack(event: any){
+  fromStationTrack(event: any) {
     this.createRouteDto.fromStationTrackId = event.option.value.id;
     this.createRouteDto.fromStationTrack = event.option.value;
 
-    if(this.createRouteDto.routeStops){
+    if (this.createRouteDto.routeStops) {
       this.createRouteDto.routeStops[0] = {
         stationTrack: this.createRouteDto.fromStationTrack,
         stationTrackId: this.createRouteDto.fromStationTrack?.id,
         departureTime: this.createRouteDto.departureTime,
         order: 1
       }
-    }      
+    }
   }
 
-  toStationTrack(event: any){
+  toStationTrack(event: any) {
     this.createRouteDto.toStationTrackId = event.option.value.id;
     this.createRouteDto.toStationTrack = event.option.value;
 
@@ -114,34 +115,62 @@ export class CreateRouteComponent implements OnInit {
     this.createRouteDto.routeStops[0] = {
       stationTrack: this.createRouteDto.fromStationTrack,
       stationTrackId: this.createRouteDto.fromStationTrack?.id,
-      departureTime: this.createRouteDto.departureTime,
+
       order: 1,
     }
 
-    this.createRouteDto.routeStops.push( {     
+    this.createRouteDto.routeStops.push({
       stationTrackId: this.createRouteDto.toStationTrack?.id,
       stationTrack: this.createRouteDto.toStationTrack,
-      arrivalTime: this.createRouteDto.arrivalTime,
       order: this.createRouteDto.routeStops.length + 1
     });
+  }
+
+  // updateRouteStopTime() {
+  //   console.log(this.createRouteDto);
+  //   if (this.createRouteDto.routeStops && this.createRouteDto.routeStops.length > 0) {
+  //     this.createRouteDto.routeStops[0].departureTime = this.createRouteDto.departureTime;
+
+  //     if (this.createRouteDto.routeStops?.length > 1) {
+  //       this.createRouteDto
+  //         .routeStops[this.createRouteDto.routeStops.length - 1]
+  //         .arrivalTime = this.createRouteDto.arrivalTime;
+  //     }
+  //   }
+  // }
+
+  setArrivalTime(event: any){
+    this.createRouteDto.arrivalTime = event;
+  }
+
+  setDepartureTime(event: any){
+    this.createRouteDto.departureTime = event;
   }
 
   addSchedule() {
   }
 
-  showRouteStops(){
-    if(this.createRouteDto.toStationTrackId && this.createRouteDto.fromStationTrackId)
+  showRouteStops() {
+    if (this.createRouteDto.toStationTrackId && this.createRouteDto.fromStationTrackId)
       this.isRouteStops = true;
     else
       //toastr
-      console.log('SELECT FROM AND TO');      
+      console.log('SELECT FROM AND TO');
   }
 
   // setStops(event: CreateRouteStopDto[]){
   //   console.log(this.createRouteDto);       
   // }
 
-  navigateToHome(){
+  setTimeInTheWay(event: number){
+    console.log(event);    
+    this.createRouteDto.hours = Math.floor( event / 60);
+    this.createRouteDto.minutes = event % 60;
+    console.log(this.createRouteDto);
+    
+  }
+
+  navigateToHome() {
     //toast success
   }
 }

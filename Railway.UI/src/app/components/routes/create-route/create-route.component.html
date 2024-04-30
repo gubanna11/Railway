@@ -29,7 +29,6 @@
         <label>number:</label>
         <input type="text" [(ngModel)]="createRouteDto.number">
     </div>
-    <!-- from, to, time -->
     <div class="dropdown">
         <p>From:</p>
         <app-localities class="child-station-dropdown" (setStationTrack)="fromStationTrack($event)"></app-localities>
@@ -41,12 +40,12 @@
 
     <div>
         <label>Departure time:</label>
-        <input type="time" [(ngModel)]="createRouteDto.departureTime">
+        <input type="time" [(ngModel)]="createRouteDto.departureTime" readonly>
     </div>
 
     <div>
         <label>Arrival time:</label>
-        <input type="time" [(ngModel)]="createRouteDto.arrivalTime">
+        <input type="time" [(ngModel)]="createRouteDto.arrivalTime" readonly>
     </div>
 
     <div>
@@ -75,12 +74,16 @@
 <p><span (click)="showRouteStops()">Add route stops</span><span (click)="navigateToHome()"
         style="font-weight: bold;">Skip</span></p>
 <div *ngIf="isRouteStops">
-    <app-create-stops [stops]="createRouteDto.routeStops">
+    <app-create-stops [stops]="createRouteDto.routeStops"
+     (totalTimeInTheWay)="setTimeInTheWay($event)"
+     (newArrivalTime)="setArrivalTime($event)"
+     (newDepartureTime)="setDepartureTime($event)"
+     >
 
     </app-create-stops>
     <p (click)="isRouteStops = false">Back</p>
 </div>
-
+  
 
 <!-- locality-autocomplete.component.html -->
 <!-- <div>
