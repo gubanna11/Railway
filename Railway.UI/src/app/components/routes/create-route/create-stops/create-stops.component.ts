@@ -49,7 +49,8 @@ export class CreateStopsComponent implements OnInit {
 
   setRouteStop(event: CreateRouteStopDto, index: number) {
     if (this.stops) {
-      this.stops[index] = event;
+      this.stops[index].stationTrack = event.stationTrack;
+      this.stops[index].stationTrackId = event.stationTrackId;
     }
   }
 

@@ -13,7 +13,6 @@ import { StationDto, StationTrackDto } from '../../../../models/stations/station
 export class LocalitiesComponent implements OnInit {
   @Output() setStationTrack: EventEmitter<StationTrackDto> = new EventEmitter<StationTrackDto>();
 
-  // localities: LocalityDto[] = [{ id: 1, name: 'name1' }, { id: 2, name: 'name2' }];
   localities?: LocalityDto[];
   filteredLocalities?: Observable<LocalityDto[] | undefined>;
   localityControl = new FormControl<string | LocalityDto>('');
@@ -28,7 +27,6 @@ export class LocalitiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO 
     this.localitiesService.getLocalities()
       .subscribe({
         next: (res) => {
