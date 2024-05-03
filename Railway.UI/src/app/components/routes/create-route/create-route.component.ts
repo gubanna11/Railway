@@ -6,10 +6,8 @@ import { TrainDto } from '../../../models/trains/trainDto';
 import { TrainsService } from '../../../services/trains.service';
 import { TrainTypesService } from '../../../services/train-types.service';
 import { CoachTypeDto } from '../../../models/coachTypes/coachTypeDto';
-import { CreateRouteStopDto } from '../../../models/routeStops/createRouteStopDto';
 import { ScheduleDto } from '../../../models/schedule/scheduleDto';
 import { FrequencyEnum } from '../../../models/enums/frequencyEnum';
-import { scheduled } from 'rxjs';
 
 @Component({
   selector: 'app-create-route',
@@ -138,7 +136,7 @@ export class CreateRouteComponent implements OnInit {
     this.createRouteDto.departureTime = event;
   }
   setDistance(event: any) {
-    this.createRouteDto.distance = event;    
+    this.createRouteDto.distance = event;
   }
 
   setFrequencies(event: FrequencyEnum[]) {
