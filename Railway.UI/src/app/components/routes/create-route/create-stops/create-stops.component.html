@@ -23,7 +23,8 @@
         <input type="time" [(ngModel)]="stop.departureTime" (change)="setDepartureTime(stop)">
     </div>
 
-    <div>
-        
+    <div *ngIf="i != 0">
+        <label>Distance</label>
+        <input type="nubmer" [(ngModel)]="stop.distance" (change)="setDistance(stop)">
     </div>
 </div>

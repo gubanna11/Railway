@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-select placeholder="Select frequencies" [(ngModel)]="inputFrequencies" multiple
+        (selectionChange)="selectionChanged()">
+        <mat-option *ngFor="let frequency of frequencies" [value]="frequency">
+            {{ frequency }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

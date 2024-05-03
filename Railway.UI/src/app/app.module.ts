@@ -14,6 +14,10 @@ import { LocalitiesComponent } from './components/routes/create-route/localities
 import { StationTracksComponent } from './components/routes/create-route/localities/stations/station-tracks/station-tracks.component';
 import { CreateStopsComponent } from './components/routes/create-route/create-stops/create-stops.component';
 import { StopComponent } from './components/routes/create-route/create-stops/stop/stop.component';
+import { ScheduleComponent } from './components/routes/create-route/schedule/schedule.component';
+import { CreateTicketComponent } from './components/tickets/create-ticket/create-ticket.component';
+import { HomeComponent } from './components/home/home.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { StopComponent } from './components/routes/create-route/create-stops/sto
     StationTracksComponent,
     CreateStopsComponent,
     StopComponent,
+    ScheduleComponent,
+    CreateTicketComponent,
+    HomeComponent,
+    MenuComponent,
   ],
   imports: [
     CommonModule,

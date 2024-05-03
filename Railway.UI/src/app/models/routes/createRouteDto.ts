@@ -22,7 +22,7 @@ export class CreateRouteDto {
     routeDetails!: CreateRouteDetailDto[];
     routeStops?: CreateRouteStopDto[];
 
-    schedules?: ScheduleDto[];
+    schedule?: ScheduleDto;
 
     comment?: string;
 }

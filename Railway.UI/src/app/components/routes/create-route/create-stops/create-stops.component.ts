@@ -13,6 +13,8 @@ export class CreateStopsComponent implements OnInit {
   @Output() newArrivalTime: EventEmitter<string> = new EventEmitter<string>();
   @Output() newDepartureTime: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() totalDistance: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() {
 
   }
@@ -90,18 +92,23 @@ export class CreateStopsComponent implements OnInit {
         }
 
         totalMinutes = timeDiffMs / (1000 * 60);
-        if(totalMinutes < 0){
+
+        if (totalMinutes < 0) {
           totalMinutes += (24 * 60);
         }
-      }
 
-    this.totalTimeInTheWay.emit(totalMinutes);
+        this.totalTimeInTheWay.emit(totalMinutes);
+      }
   }
 
   setDepartureTime(stop: any) {
     if (this.stops?.indexOf(stop) == 0) {
       this.newDepartureTime.emit(stop.departureTime);
     }
+  }
+
+  setDistance(stop: any) {
+    this.totalDistance.emit(stop.distance);
   }
 
   setRouteStops() {

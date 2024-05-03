@@ -1,0 +1,14 @@
+<div style="display: flex; justify-content: space-around;">
+    <div>
+        <a>Railway</a>
+    </div>
+    <div>
+        <button mat-flat-button color="primary" routerLink="tickets/book">Book a ticket</button>
+    </div>
+    <div>
+        <button mat-button [matMenuTriggerFor]="menu">Admin</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="routes/create">Create route</button>
+        </mat-menu>
+    </div>
+</div>

@@ -7,6 +7,9 @@ import { TrainsService } from '../../../services/trains.service';
 import { TrainTypesService } from '../../../services/train-types.service';
 import { CoachTypeDto } from '../../../models/coachTypes/coachTypeDto';
 import { CreateRouteStopDto } from '../../../models/routeStops/createRouteStopDto';
+import { ScheduleDto } from '../../../models/schedule/scheduleDto';
+import { FrequencyEnum } from '../../../models/enums/frequencyEnum';
+import { scheduled } from 'rxjs';
 
 @Component({
   selector: 'app-create-route',
@@ -24,6 +27,8 @@ export class CreateRouteComponent implements OnInit {
 
   isRouteStops = false;
 
+  frequencies = Object.values(FrequencyEnum);
+
   constructor(private routeService: RoutesService,
     private trainService: TrainsService,
     private trainTypesService: TrainTypesService,
@@ -32,6 +37,7 @@ export class CreateRouteComponent implements OnInit {
 
   ngOnInit(): void {
     this.createRouteDto = new CreateRouteDto();
+    this.createRouteDto.schedule = new ScheduleDto();
 
     this.trainTypesService.getTrainTypes()
       .subscribe({
@@ -81,15 +87,15 @@ export class CreateRouteComponent implements OnInit {
 
   createRoute() {
     console.log(this.createRouteDto);
-    this.routeService.add(this.createRouteDto)
-      .subscribe({
-        next: (route) => {
-          console.log(route);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    // this.routeService.add(this.createRouteDto)
+    //   .subscribe({
+    //     next: (route) => {
+    //       console.log(route);
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //     },
+    //   });
   }
 
   fromStationTrack(event: any) {
@@ -139,15 +145,21 @@ export class CreateRouteComponent implements OnInit {
   //   }
   // }
 
-  setArrivalTime(event: any){
+  setArrivalTime(event: any) {
     this.createRouteDto.arrivalTime = event;
   }
 
-  setDepartureTime(event: any){
+  setDepartureTime(event: any) {
     this.createRouteDto.departureTime = event;
   }
+  setDistance(event: any) {
+    this.createRouteDto.distance = event;
+    console.log(this.createRouteDto);
+    
+  }
 
-  addSchedule() {
+  setFrequencies(event: FrequencyEnum[]) {
+    this.createRouteDto.schedule!.frequencies = event;
   }
 
   showRouteStops() {
@@ -162,12 +174,13 @@ export class CreateRouteComponent implements OnInit {
   //   console.log(this.createRouteDto);       
   // }
 
-  setTimeInTheWay(event: number){
-    console.log(event);    
-    this.createRouteDto.hours = Math.floor( event / 60);
-    this.createRouteDto.minutes = event % 60;
-    console.log(this.createRouteDto);
+  setTimeInTheWay(event: number) {
+    console.log(event);
     
+    this.createRouteDto.hours = Math.floor(event / 60);
+    this.createRouteDto.minutes = event % 60;
+console.log(this.createRouteDto.hours);
+
   }
 
   navigateToHome() {

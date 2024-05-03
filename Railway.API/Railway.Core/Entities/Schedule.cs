@@ -1,6 +1,4 @@
 ﻿using Railway.Core.Entities.Enums;
-using System;
-using System.Collections.Generic;
 
 namespace Railway.Core.Entities;
 

@@ -33,7 +33,7 @@ public class CreateRouteDto
 
     public ICollection<CreateRouteDetailDto> RouteDetails { get; set; }
 
-    public ICollection<Schedule> Schedules { get; set; }
+    public ScheduleDto Schedule { get; set; }
 
     public ICollection<CreateRouteStopDto> RouteStops { get; set; }
 }

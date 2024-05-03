@@ -1,0 +1,21 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Locality</mat-label>
+      <input type="text" matInput [formControl]="localityControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLocality"
+        (optionSelected)="localitySelected($event)">
+        <mat-option *ngFor="let option of filteredLocalities | async" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-flat-button color="primary">Accent</button>
+  </form>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
