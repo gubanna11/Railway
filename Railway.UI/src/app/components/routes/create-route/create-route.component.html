@@ -1,0 +1,99 @@
+<div style="display: flex;">
+    <div>
+        <div>
+            <p>Train types:</p>
+            <div *ngFor="let type of trainTypes">
+                <p (click)="setTrainType(type)" style="cursor: pointer;" [class.active]="selectedType == type">{{type.name}}</p>
+            </div>
+        </div>
+        
+        <div *ngIf="createRouteDto">
+            <div>
+                <label>Train</label>
+                <div *ngFor="let train of trains">
+                    <div (click)="selectTrain(train)">
+                        {{train.number}}
+                        <p [class.active]="train.id == createRouteDto.trainId"></p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 24px" *ngFor="let detail of createRouteDto.routeDetails; let i = index">
+                <div>
+                    <label>{{coachTypes![i].name}} amount</label>
+                    <input type="number" [(ngModel)]="detail.coachesAmount">
+                </div>
+                <div>
+                    <label>price:</label>
+                    <input type="number" [(ngModel)]="detail.price">
+                </div>
+            </div>
+            <div>
+                <label>number:</label>
+                <input type="text" [(ngModel)]="createRouteDto.number">
+            </div>
+            <div class="dropdown">
+                <p>From:</p>
+                <app-localities class="child-station-dropdown" (setStationTrack)="fromStationTrack($event)"></app-localities>
+            </div>
+            <div class="dropdown">
+                <p>To:</p>
+                <app-localities class="child-station-dropdown" (setStationTrack)="toStationTrack($event)"></app-localities>
+            </div>
+        
+            <div *ngIf="createRouteDto.departureTime">
+                <label>Departure time:</label>
+                <p>{{ createRouteDto.departureTime }}</p>
+            </div>
+        
+            <div *ngIf="createRouteDto.arrivalTime">
+                <label>Arrival time:</label>
+                <p>{{ createRouteDto.arrivalTime }}</p>
+            </div>
+        
+            <div *ngIf="createRouteDto.routeStops && createRouteDto.routeStops[0].departureTime
+                && createRouteDto.routeStops[1].arrivalTime
+                && createRouteDto.hours
+                && createRouteDto.minutes">
+                <label>Total time in the way:</label>
+                <p *ngIf="createRouteDto.hours != 0">{{createRouteDto.hours}} h.</p>
+                <p *ngIf="createRouteDto.minutes != 0">{{createRouteDto.minutes}} min.</p>
+            </div>
+        
+            <div *ngIf="createRouteDto.distance && createRouteDto.distance > 0">
+                <label>Distance:</label>
+                <p>{{ createRouteDto.distance }}</p>
+            </div>
+        
+            <div>
+                <p>Add Schedule</p>
+                <div *ngIf="createRouteDto.schedule">
+                    <app-schedule (selectedFrequenciesChange)="setFrequencies($event)"
+                        [inputFrequencies]="createRouteDto.schedule.frequencies"></app-schedule>
+                </div>
+            </div>
+        
+        
+            <div>
+                <label>Comment: </label>
+                <textarea [(ngModel)]="createRouteDto.comment"></textarea>
+            </div>
+        
+            <button type="submit" (click)="createRoute()">submit</button>
+        </div>
+        
+        
+        <p>
+            <span (click)="showRouteStops()">Add route stops</span>
+            <span (click)="navigateToHome()" style="font-weight: bold;">Skip</span>
+        </p>
+    </div>
+    
+    <div *ngIf="isRouteStops">
+        <app-create-stops [stops]="createRouteDto.routeStops" (totalTimeInTheWay)="setTimeInTheWay($event)"
+            (newArrivalTime)="setArrivalTime($event)" (newDepartureTime)="setDepartureTime($event)"
+            (totalDistance)="setDistance($event)">
+    
+        </app-create-stops>
+        <p (click)="isRouteStops = false">Hide</p>
+    </div>
+</div>
