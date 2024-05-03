@@ -77,7 +77,6 @@ export class CreateRouteComponent implements OnInit {
           }
         }
       )
-
   }
 
 
@@ -86,16 +85,15 @@ export class CreateRouteComponent implements OnInit {
   }
 
   createRoute() {
-    console.log(this.createRouteDto);
-    // this.routeService.add(this.createRouteDto)
-    //   .subscribe({
-    //     next: (route) => {
-    //       console.log(route);
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //     },
-    //   });
+    this.routeService.add(this.createRouteDto)
+      .subscribe({
+        next: (route) => {
+          console.log(route);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   fromStationTrack(event: any) {
@@ -132,19 +130,6 @@ export class CreateRouteComponent implements OnInit {
     });
   }
 
-  // updateRouteStopTime() {
-  //   console.log(this.createRouteDto);
-  //   if (this.createRouteDto.routeStops && this.createRouteDto.routeStops.length > 0) {
-  //     this.createRouteDto.routeStops[0].departureTime = this.createRouteDto.departureTime;
-
-  //     if (this.createRouteDto.routeStops?.length > 1) {
-  //       this.createRouteDto
-  //         .routeStops[this.createRouteDto.routeStops.length - 1]
-  //         .arrivalTime = this.createRouteDto.arrivalTime;
-  //     }
-  //   }
-  // }
-
   setArrivalTime(event: any) {
     this.createRouteDto.arrivalTime = event;
   }
@@ -153,9 +138,7 @@ export class CreateRouteComponent implements OnInit {
     this.createRouteDto.departureTime = event;
   }
   setDistance(event: any) {
-    this.createRouteDto.distance = event;
-    console.log(this.createRouteDto);
-    
+    this.createRouteDto.distance = event;    
   }
 
   setFrequencies(event: FrequencyEnum[]) {
@@ -175,12 +158,8 @@ export class CreateRouteComponent implements OnInit {
   // }
 
   setTimeInTheWay(event: number) {
-    console.log(event);
-    
     this.createRouteDto.hours = Math.floor(event / 60);
     this.createRouteDto.minutes = event % 60;
-console.log(this.createRouteDto.hours);
-
   }
 
   navigateToHome() {

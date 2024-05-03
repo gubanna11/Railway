@@ -8,7 +8,6 @@ import { CreateRouteStopDto } from '../../../../models/routeStops/createRouteSto
 })
 export class CreateStopsComponent implements OnInit {
   @Input() stops?: CreateRouteStopDto[];
-  // @Output() createdStops: EventEmitter<CreateRouteStopDto[]> = new EventEmitter<CreateRouteStopDto[]>();
   @Output() totalTimeInTheWay: EventEmitter<number> = new EventEmitter<number>();
   @Output() newArrivalTime: EventEmitter<string> = new EventEmitter<string>();
   @Output() newDepartureTime: EventEmitter<string> = new EventEmitter<string>();

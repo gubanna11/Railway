@@ -1,7 +1,6 @@
 ﻿using Railway.Core.Entities;
-using System.Collections.Generic;
 using System;
-using Railway.Infrastructure.Dtos.CreateDtos;
+using System.Collections.Generic;
 
 namespace Railway.Infrastructure.Dtos;
 
@@ -33,9 +32,9 @@ public class RouteDto
 
     public string? Comment { get; set; }
 
-    public ICollection<CreateRouteDetailDto>? RouteDetails { get; set; }
+    public ICollection<RouteDetail>? RouteDetails { get; set; }
 
-    public ICollection<Schedule>? Schedules { get; set; }
+    public ScheduleDto Schedule { get; set; }
 
     public ICollection<RouteStop>? RouteStops { get; set; }
 }

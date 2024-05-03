@@ -25,6 +25,8 @@ public class RouteStop : BaseEntity
     public int InTheWayMinutes { get; set; }
 
     public bool IsArchived { get; set; }
+    
+    public double Distance { get; set; }
 
     public string Comment { get; set; }
 }
