@@ -18,6 +18,7 @@ import { ScheduleComponent } from './components/routes/create-route/schedule/sch
 import { CreateTicketComponent } from './components/tickets/create-ticket/create-ticket.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SeatsInfoComponent } from './components/seats/seats-info/seats-info.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MenuComponent } from './components/menu/menu.component';
     CreateTicketComponent,
     HomeComponent,
     MenuComponent,
+    SeatsInfoComponent,
   ],
   imports: [
     CommonModule,

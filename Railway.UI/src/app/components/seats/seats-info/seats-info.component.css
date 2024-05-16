@@ -1,0 +1,38 @@
+.detail{
+    display: flex; 
+    gap:20px;
+    cursor: pointer;
+}
+
+.detail.active{
+    border: 2px solid #afacac;
+}
+
+.coaches, .seats{
+    display: flex;
+    gap: 32px;
+}
+
+.seats{
+    flex-wrap: wrap;
+    width: 60%;
+    justify-content: center;
+}
+
+.seat{
+    width: 24px;
+    gap: 32px;
+}
+
+.seat.active{
+    background-color: rgb(99, 99, 231);
+    color: #fff;
+}
+
+.coach{
+    cursor: pointer;
+}
+
+.coach.active{
+    border: 1px solid #d1c4c4;
+}

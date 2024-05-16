@@ -54,5 +54,7 @@ public static class Dependencies
         services.AddScoped<ITrainTypesService, TrainTypesService>();
         services.AddScoped<ILocalitiesService, LocalitiesService>();
         services.AddScoped<IStationsService, StationsService>();
+        services.AddScoped<IRouteStopsService, RouteStopsService>();
+        services.AddScoped<IRouteSeatsService, RouteSeatsService>();
     }
 }

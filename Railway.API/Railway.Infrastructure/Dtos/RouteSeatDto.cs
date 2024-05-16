@@ -1,7 +1,11 @@
-﻿namespace Railway.Core.Entities;
+﻿using Railway.Core.Entities;
 
-public class RouteSeat : BaseEntity
+namespace Railway.Infrastructure.Dtos;
+
+public class RouteSeatDto
 {
+    public int Id { get; set; }
+
     public int RouteDetailId { get; set; }
     public RouteDetail RouteDetail { get; set; }
 
@@ -11,5 +15,5 @@ public class RouteSeat : BaseEntity
 
     public bool IsArchived { get; set; }
 
-    public ICollection<Ticket> Tickets { get; set; }
+    public bool IsAvailable { get; set; }
 }

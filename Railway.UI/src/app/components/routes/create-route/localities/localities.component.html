@@ -11,4 +11,4 @@
   </mat-form-field>
 </form>
 
-<app-stations [localityId]="localityId" (setStationTrack)="setNewStationTrack($event)"></app-stations>
+<app-stations *ngIf="isShown" [localityId]="localityId" (setStationTrack)="setNewStationTrack($event)"></app-stations>

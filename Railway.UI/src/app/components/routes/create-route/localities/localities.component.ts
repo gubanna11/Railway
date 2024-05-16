@@ -12,6 +12,7 @@ import { StationDto, StationTrackDto } from '../../../../models/stations/station
 })
 export class LocalitiesComponent implements OnInit {
   @Output() setStationTrack: EventEmitter<StationTrackDto> = new EventEmitter<StationTrackDto>();
+  @Output() selectedLocality: EventEmitter<LocalityDto> = new EventEmitter<LocalityDto>();
 
   localities?: LocalityDto[];
   filteredLocalities?: Observable<LocalityDto[] | undefined>;
@@ -20,6 +21,8 @@ export class LocalitiesComponent implements OnInit {
   localityId!: number;
 
   selectedStation? : StationDto;
+
+  @Input() isShown: boolean = true;
 
   constructor(
     private localitiesService: LocalitiesService,
@@ -60,6 +63,8 @@ export class LocalitiesComponent implements OnInit {
 
   localitySelected(event: any) {
     this.localityId = event.option.value.id;
+
+    this.selectedLocality.emit(this.localities?.find(l => l.id == this.localityId));
   }
 
   setNewStationTrack(event: any) {
