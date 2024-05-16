@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { LocalityDto } from '../../../models/localities/localityDto';
-import { Observable, map, startWith } from 'rxjs';
-import { LocalitiesService } from '../../../services/localities.service';
 import { FormControl } from '@angular/forms';
+import { RouteStopTicketDto } from '../../../models/procedures/routeSearch/routeStopTicketDto';
+import { RouteStopsService } from '../../../services/route-stops.service';
+import { RouteSeatsService } from '../../../services/route-seats.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ticket',
@@ -10,50 +12,61 @@ import { FormControl } from '@angular/forms';
   styleUrl: './create-ticket.component.css'
 })
 export class CreateTicketComponent {
-  localities?: LocalityDto[];
-  filteredLocalities?: Observable<LocalityDto[] | undefined>;
-  localityControl = new FormControl<string | LocalityDto>('');
-
-  localityId!: number | undefined;
+  fromLocality?: LocalityDto;
+  toLocality?: LocalityDto;
+  date? : Date;
+  routeStops? : RouteStopTicketDto[];
 
   constructor(
-    private localitiesService: LocalitiesService,
+    private routeStopsService: RouteStopsService,
+    private routeSeatsService: RouteSeatsService,
+    private router: Router,
   ) {
   }
 
-  ngOnInit(): void { 
-    this.localitiesService.getLocalities()
+  ngOnInit(): void {
+  }
+
+  setFromLocality(event: any) {
+    this.fromLocality = event;  
+  }
+
+  setToLocality(event: any) {
+    this.toLocality = event;
+  }
+
+  searchRoutes(){
+    this.routeStopsService.getRouteStopsWithDate(this.fromLocality!.id,
+       this.toLocality!.id, 
+       this.date!.toLocaleDateString())
       .subscribe({
         next: (res) => {
-          this.localities = res;
-
-          this.filteredLocalities = this.localityControl.valueChanges.pipe(
-            startWith(''),
-            map(value => {
-              const name = typeof value === 'string' ? value : value?.name;
-              return name ? this._filter(name) : this.localities;
-            }),
-          );
+          this.routeStops = res;      
+          console.log(res);
+          
         },
-        error: () => { },
-      })
+        error: (err) => {
+          console.log(err);          
+        }
+      });
   }
 
-  displayLocality(localityDto: LocalityDto): string {
-    return localityDto && localityDto.name ? localityDto.name : '';
+  getSeatsByCoachTypeId(stop: RouteStopTicketDto,routeId: number, coachTypeId: number){
+    this.routeSeatsService.getRouteSeatsByCoachTypeId(routeId, this.date!.toLocaleDateString(), coachTypeId)
+    .subscribe({
+      next: (res) => {
+        let detail = stop.details?.find(d => d.coachTypeId == coachTypeId);
+        detail = res;         
+      },
+      error: (err) => {
+        console.log(err);          
+      }
+    });
+
+    this.router.navigate(['/seats'], { state: { stop: stop, date: this.date, coachTypeId: coachTypeId } });
   }
 
-  private _filter(name: string): LocalityDto[] {
-    if (this.localities) {
-      const filterValue = name.toLowerCase();
-      return this.localities.filter(option =>
-        option.name.toLowerCase().includes(filterValue)
-      );
-    }
-    return [];
-  }
-
-  localitySelected(event: any) {
-    this.localityId = event.option.value.id;
+  navigateToRouteDetails(routeId?: number){
+    // navigate
   }
 }
