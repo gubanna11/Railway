@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Railway.Core.Abstract;
 using Railway.Core.Abstract.Interfaces;
 using Railway.Core.Data;
@@ -9,6 +11,7 @@ using Railway.Core.Entities;
 using Railway.Infrastructure.Mapping;
 using Railway.Infrastructure.Services;
 using Railway.Infrastructure.Services.Interfaces;
+using System.Text;
 
 namespace Railway.Dependencies;
 
@@ -22,6 +25,8 @@ public static class Dependencies
         services.ConfigureMapper();
 
         services.ConfigureServices();
+        services.ConfigureCors(configuration);
+        services.ConfigureJwt(configuration);
 
         return services;
     }
@@ -56,5 +61,42 @@ public static class Dependencies
         services.AddScoped<IStationsService, StationsService>();
         services.AddScoped<IRouteStopsService, RouteStopsService>();
         services.AddScoped<IRouteSeatsService, RouteSeatsService>();
+
+        services.AddScoped<JwtHandler>();
+    }
+
+    private static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = configuration.GetSection("JWTSettings");
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings["validIssuer"],
+                ValidAudience = jwtSettings["validAudience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                    .GetBytes(jwtSettings.GetSection("securityKey").Value))
+            };
+        });
+    }
+    private static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddCors(options => options.AddPolicy(name: configuration["UI:Name"]!,
+        policy =>
+        {
+            policy
+            .WithOrigins(configuration["UI:Link"]!)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+        }));
     }
 }
