@@ -63,5 +63,6 @@ public class AppDbContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new TicketConfiguration());
         modelBuilder.ApplyConfiguration(new TicketOptionConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
     }
 }
