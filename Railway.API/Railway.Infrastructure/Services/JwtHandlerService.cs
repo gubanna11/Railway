@@ -40,6 +40,7 @@ public class JwtHandler
         {
             new Claim(ClaimTypes.Name, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.Id)
+            new Claim(ClaimTypes.Name, user.Email)
         };
 
         var roles = await _userManager.GetRolesAsync(user);

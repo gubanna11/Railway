@@ -47,6 +47,7 @@ public class DataProfile : Profile
         CreateMap<Station, StationDto>()
             .ReverseMap();
 
+
         CreateMap<CreateTicketDto, Ticket>();
 
         CreateMap<TicketDto, Ticket>()
@@ -68,6 +69,7 @@ public class DataProfile : Profile
 
         CreateMap<OptionDto, Option>()
             .ReverseMap();
+
 
         CreateMap<UserForRegistrationDto, User>()
              .ForMember(u => u.UserName, opt => opt.MapFrom(dto => dto.Email));
