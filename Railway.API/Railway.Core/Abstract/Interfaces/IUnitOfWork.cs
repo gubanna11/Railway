@@ -13,5 +13,7 @@ public interface IUnitOfWork<T> where T : BaseEntity
 
     Task<IEnumerable<Type>> CallProcedureAsync<Type>(string procedureName, params object[] parameters);
 
+    Task<Type> CallFunctionAsync<Type>(string functionName, params object[] parameters);
+
     Task SaveAsync();
 }

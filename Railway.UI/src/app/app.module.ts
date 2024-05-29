@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { CreateRouteComponent } from './components/routes/create-route/create-route.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './modules/material/material.module';
 import { StationsComponent } from './components/routes/create-route/localities/stations/stations.component';
@@ -19,6 +19,10 @@ import { CreateTicketComponent } from './components/tickets/create-ticket/create
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SeatsInfoComponent } from './components/seats/seats-info/seats-info.component';
+import { MyTicketsComponent } from './components/tickets/my-tickets/my-tickets.component';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ErrorHandlerInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,7 @@ import { SeatsInfoComponent } from './components/seats/seats-info/seats-info.com
     HomeComponent,
     MenuComponent,
     SeatsInfoComponent,
+    MyTicketsComponent,
   ],
   imports: [
     CommonModule,
@@ -44,9 +49,22 @@ import { SeatsInfoComponent } from './components/seats/seats-info/seats-info.com
     MaterialModule,
     ReactiveFormsModule,
     AsyncPipe,
+    AuthModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem("token"),
+        allowedDomains: ["localhost:44359"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [
-    provideAnimationsAsync('noop')
+    provideAnimationsAsync('noop'),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

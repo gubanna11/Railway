@@ -11,6 +11,8 @@ public class RouteStopTicketDetailDto
 
     public int SeatsAvailableAmount { get; set; }
 
+    public double Price { get; set; }
+
     [NotMapped]
     public ICollection<TicketCoachDto> Coaches { get; set; }
 }

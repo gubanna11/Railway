@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 export class CreateTicketComponent {
   fromLocality?: LocalityDto;
   toLocality?: LocalityDto;
-  date? : Date;
-  routeStops? : RouteStopTicketDto[];
+  date?: Date;
+  routeStops?: RouteStopTicketDto[];
 
   constructor(
     private routeStopsService: RouteStopsService,
@@ -28,45 +28,45 @@ export class CreateTicketComponent {
   }
 
   setFromLocality(event: any) {
-    this.fromLocality = event;  
+    this.fromLocality = event;
   }
 
   setToLocality(event: any) {
     this.toLocality = event;
   }
 
-  searchRoutes(){
+  searchRoutes() {
     this.routeStopsService.getRouteStopsWithDate(this.fromLocality!.id,
-       this.toLocality!.id, 
-       this.date!.toLocaleDateString())
+      this.toLocality!.id,
+      this.date!.toLocaleDateString())
       .subscribe({
         next: (res) => {
-          this.routeStops = res;      
+          this.routeStops = res;
           console.log(res);
-          
+
         },
         error: (err) => {
-          console.log(err);          
+          console.log(err);
         }
       });
   }
 
-  getSeatsByCoachTypeId(stop: RouteStopTicketDto,routeId: number, coachTypeId: number){
+  getSeatsByCoachTypeId(stop: RouteStopTicketDto, routeId: number, coachTypeId: number) {
     this.routeSeatsService.getRouteSeatsByCoachTypeId(routeId, this.date!.toLocaleDateString(), coachTypeId)
-    .subscribe({
-      next: (res) => {
-        let detail = stop.details?.find(d => d.coachTypeId == coachTypeId);
-        detail = res;         
-      },
-      error: (err) => {
-        console.log(err);          
-      }
-    });
+      .subscribe({
+        next: (res) => {
+          let detail = stop.details?.find(d => d.coachTypeId == coachTypeId);
+          detail = res;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
 
     this.router.navigate(['/seats'], { state: { stop: stop, date: this.date, coachTypeId: coachTypeId } });
   }
 
-  navigateToRouteDetails(routeId?: number){
+  navigateToRouteDetails(routeId?: number) {
     // navigate
   }
 }

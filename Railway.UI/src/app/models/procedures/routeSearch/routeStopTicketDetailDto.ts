@@ -4,5 +4,6 @@ export class RouteStopTicketDetailDto {
     coachTypeId?: number;
     coachTypeName?: string;
     seatsAvailableAmount?: number;
+    price?: number;
     coaches?: TicketCoachDto[];
 }

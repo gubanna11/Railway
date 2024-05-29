@@ -18,11 +18,6 @@ public class TicketConfiguration : BaseEntityConfiguration<Ticket>
             .WithMany(tt => tt.Tickets)
             .HasForeignKey(t => t.TicketTypeId);
 
-        // relations with Schedule
-        builder.HasOne(t => t.Schedule)
-            .WithMany(s => s.Tickets)
-            .HasForeignKey(t => t.ScheduleId);
-
         // relation with RouteSeat
         builder.HasOne(t => t.RouteSeat)
             .WithMany(rs => rs.Tickets)

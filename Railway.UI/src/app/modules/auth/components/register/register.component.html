@@ -1,0 +1,50 @@
+<form [formGroup]="registerForm" class="form-auth">
+    <div class="input-field">
+        <input formControlName="firstName" type="text" placeholder="First name">
+        <p *ngIf="registerForm.controls['firstName'].dirty && registerForm.hasError('required', 'firstName')">
+            *First Name is requiered
+        </p>
+    </div>
+    <div class="input-field">
+        <span class="fa fa-user"></span>
+        <input formControlName="lastName" type="text" placeholder="Last name">
+        <p *ngIf="registerForm.controls['lastName'].dirty && registerForm.hasError('required', 'lastName')">
+            *Last Name is requiered
+        </p>
+    </div>
+
+    <div class="input-field">
+        <input formControlName="email" type="text" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+        <p *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('required', 'email')">
+            *Email is requiered
+        </p>
+        <p *ngIf="registerForm.controls['email'].errors?.['pattern']">
+            example&#64;example.example
+        </p>
+    </div>
+
+    <div class="input-field">
+        <span class="fa fa-lock"></span>
+        <input formControlName="password" type="password" placeholder="New Password">
+        <p *ngIf="registerForm.controls['password'].dirty && registerForm.hasError('required', 'password')">
+            *Password is requiered
+        </p>
+    </div>
+    
+
+    <div class="input-field">
+        <span class="fa fa-lock"></span>
+        <input formControlName="confirmPassword" placeholder="Confirm Password" type="password">
+    
+        <p *ngIf="registerForm.controls['confirmPassword'].dirty && registerForm.hasError('required', 'confirmPassword')">
+            *Confirm Password is requiered
+        </p>
+        <p *ngIf="registerForm.hasError('confirmPasswordValidator', 'confirmPassword')">
+            *Password doesn't match
+        </p>
+    </div>
+    
+
+    <button (click)="registerUser(registerForm.value)" type="submit" class="btn">Sign up</button>
+
+</form>

@@ -38,6 +38,7 @@ public class RouteStopsService : IRouteStopsService
                     CoachTypeId = routeAvailability.CoachTypeId,
                     CoachTypeName = routeAvailability.CoachTypeName,
                     SeatsAvailableAmount = routeAvailability.AvailableAmount,
+                    Price = routeAvailability.Price,
                 });
             }
         }
