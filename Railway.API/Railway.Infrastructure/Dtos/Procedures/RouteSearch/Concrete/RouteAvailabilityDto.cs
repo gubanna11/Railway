@@ -10,6 +10,8 @@ public class RouteAvailabilityDto
 
     public string CoachTypeName { get; set; }
 
+    public double Price { get; set; }
+
     public int TotalSeatsAmount { get; set; }
 
     public int BookedAmount { get; set; }

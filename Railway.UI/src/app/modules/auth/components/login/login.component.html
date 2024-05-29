@@ -1,0 +1,20 @@
+<form [formGroup]="loginForm" class="form-auth">
+    <div>
+        <input formControlName="userName" type="text" placeholder="User name">
+        <p *ngIf="loginForm.controls['userName'].dirty && loginForm.hasError('required', 'userName')">
+            *User Name is requiered
+        </p>
+    </div>
+    <div>
+        <input formControlName="password" type="password" placeholder="Password">
+        <p *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')">
+            *Password is requiered
+        </p>
+    </div>
+    
+    <button (click)="onLogin(loginForm.value)" type="submit">Login</button>
+    <div>
+        Don't have an account?
+        <a routerLink="/auth/register">Sign Up</a>
+    </div>
+</form>

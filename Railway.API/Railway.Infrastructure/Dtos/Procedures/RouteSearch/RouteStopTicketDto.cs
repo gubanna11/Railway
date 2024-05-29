@@ -12,7 +12,11 @@ public class RouteStopTicketDto
 
     public string RouteFromLocality { get; set; }
 
+    public int FromRouteStopId { get; set; }
+
     public string RouteToLocality { get; set; }
+
+    public int ToRouteStopId { get; set; }
 
     public TimeSpan? DepartureTime { get; set; }
 

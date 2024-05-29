@@ -61,6 +61,8 @@ public static class Dependencies
         services.AddScoped<IStationsService, StationsService>();
         services.AddScoped<IRouteStopsService, RouteStopsService>();
         services.AddScoped<IRouteSeatsService, RouteSeatsService>();
+        services.AddScoped<IOptionsService, OptionsService>();
+        services.AddScoped<ITicketsService, TicketsService>();
 
         services.AddScoped<JwtHandler>();
     }

@@ -29,6 +29,12 @@
     color: #fff;
 }
 
+.seat.chosen{
+    background-color: rgb(99, 99, 231);
+    color: #fff;
+    border: 4px solid #000000;
+}
+
 .coach{
     cursor: pointer;
 }

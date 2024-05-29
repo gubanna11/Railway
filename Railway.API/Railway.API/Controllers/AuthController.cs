@@ -47,7 +47,7 @@ public class AuthController : ControllerBase
             return BadRequest(new RegistrationResponseDto { Errors = errors });
         }
 
-        await _userManager.AddToRoleAsync(user, UserRoles.User);
+        await _userManager.AddToRoleAsync(user, UserRoles.Admin);
 
         return StatusCode(201);
     }

@@ -13,7 +13,20 @@
 
 
 <div class="seats">
-    <div *ngFor="let seat of selectedCoach?.seats" class="seat" [class.active]="seat.isAvailable == true">
-        <p>{{ seat.seatNumber }}</p>
+    <div *ngFor="let seat of selectedCoach?.seats" class="seat" [class.chosen]="seat == selectedSeat" [class.active]="seat.isAvailable == true">
+        <p (click)="chooseSeat(seat)">{{ seat.seatNumber }}</p>
     </div>
 </div>
+
+<p>{{ ticket.totalPrice }}</p>
+
+<mat-form-field>
+    <mat-select placeholder="Select options" [(ngModel)]="selectedOptions" multiple
+        (selectionChange)="optionChanged()">
+        <mat-option *ngFor="let frequency of options" [value]="frequency">
+            {{ frequency.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<button mat-flat-button color="primary" (click)="addTicket()">Book</button>

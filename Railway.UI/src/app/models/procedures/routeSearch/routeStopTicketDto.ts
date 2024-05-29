@@ -5,7 +5,10 @@ export class RouteStopTicketDto {
     routeId?: number;
 
     routeFromLocality?: string;
+    fromRouteStopId?: number;
+
     routeToLocality?: string;
+    toRouteStopId?: number;
 
     departureTime?: string;
     arrivalTime?: string;

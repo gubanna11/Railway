@@ -5,10 +5,30 @@
     <div>
         <button mat-flat-button color="primary" routerLink="tickets/book">Book a ticket</button>
     </div>
-    <div>
+    <div *ngIf="isUserAuthenticated">
+      <button mat-flat-button routerLink="my-tickets">My tickets</button>
+  </div>
+    <div *ngIf="isUserAuthenticated && role == Roles.Admin">
         <button mat-button [matMenuTriggerFor]="menu">Admin</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="routes/create">Create route</button>
         </mat-menu>
     </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul *ngIf="!isUserAuthenticated" class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link"[routerLink]="['/auth/register']" routerLinkActive="active" 
+              [routerLinkActiveOptions]="{exact: true}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/auth/login']" routerLinkActive="active" 
+              [routerLinkActiveOptions]="{exact: true}">Login</a>
+          </li>
+        </ul>
+        <ul *ngIf="isUserAuthenticated" class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
 </div>

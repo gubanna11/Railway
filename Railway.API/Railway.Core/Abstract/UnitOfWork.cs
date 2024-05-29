@@ -39,6 +39,21 @@ public class UnitOfWork<T> : IUnitOfWork<T> where T : BaseEntity
         return _context.Database.SqlQueryRaw<Type>(commandText, parameters).ToList();
     }
 
+    public async Task<Type> CallFunctionAsync<Type>(string functionName, params object[] parameters)
+    {
+        string[] parametersArray = new string[parameters.Length];
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            parametersArray[i] = $"{{{i}}}";
+        }
+
+        string parametersString = string.Join(", ", parametersArray);
+
+        var commandText = $"SELECT {functionName}({parametersString})";
+        var result = await _context.Database.SqlQueryRaw<Type>(commandText, parameters).ToListAsync();
+        return result.FirstOrDefault();
+    }
+
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
