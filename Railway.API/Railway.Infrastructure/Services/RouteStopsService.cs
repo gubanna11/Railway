@@ -13,13 +13,10 @@ namespace Railway.Infrastructure.Services;
 public class RouteStopsService : IRouteStopsService
 {
     private readonly IUnitOfWork<RouteStop> _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public RouteStopsService(IUnitOfWork<RouteStop> unitOfWork,
-        IMapper mapper)
+    public RouteStopsService(IUnitOfWork<RouteStop> unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     public async Task<IEnumerable<RouteStopTicketDto>> GetRoutesBetweenLocalities(int fromLocalityId, int toLocalityId, DateTime date)

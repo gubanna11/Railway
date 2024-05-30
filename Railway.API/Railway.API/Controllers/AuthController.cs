@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Railway.Core.Entities;
@@ -8,7 +7,6 @@ using Railway.Infrastructure.Dtos.Auth;
 using Railway.Infrastructure.Dtos.Registration;
 using Railway.Infrastructure.Services;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Railway.API.Controllers;
 
@@ -67,17 +65,5 @@ public class AuthController : ControllerBase
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
         return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
-    }
-
-    [Authorize]
-    [HttpGet("user-info")]
-    public async Task<IActionResult> GetUserInfo()
-    {
-        var roles = User
-            .FindAll(ClaimTypes.Role)
-            .Select(c => c.Value)
-            .ToList();
-
-        return Ok(new { Roles = roles });
     }
 }

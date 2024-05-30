@@ -4,7 +4,6 @@ using Railway.Core.Entities;
 using Railway.Infrastructure.Dtos;
 using Railway.Infrastructure.Dtos.CreateDtos;
 using Railway.Infrastructure.Services.Interfaces;
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

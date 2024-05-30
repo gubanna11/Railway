@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Railway.Core.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace Railway.Core.Data.Configurations;
 
