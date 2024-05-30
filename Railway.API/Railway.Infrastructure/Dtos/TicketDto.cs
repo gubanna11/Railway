@@ -10,7 +10,10 @@ public class TicketDto
     public string UserId { get; set; }
 
     public int? FromStationTrackId { get; set; }
+    public string? FromName { get; set; }
+
     public int? ToStationTrackId { get; set; }
+    public string? ToName { get; set; }
 
     public int? RouteSeatId { get; set; }
 

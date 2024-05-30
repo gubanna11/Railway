@@ -49,17 +49,18 @@ public class TicketsService : ITicketsService
 
     public async Task<IEnumerable<TicketDto>> GetByUserId(string userId)
     {
-        var tickets = _unitOfWork.GenericRepository.GetAll(t => t.UserId == userId, null, t => t.TicketOptions);
+        var tickets = _unitOfWork.GenericRepository.GetAll(
+            t => t.UserId == userId,
+            null,
+            t => t.TicketOptions,
+            t => t.FromRouteStop.StationTrack.Station.Locality,
+            t => t.ToRouteStop.StationTrack.Station.Locality);
 
         return _mapper.Map<IEnumerable<TicketDto>>(tickets);
     }
 
-    //calculateTotalPrice(routeSeatId INT, ticketTypeId INT, distance DECIMAL(10, 2))
     public async Task<double> CalculateTotalPrice(int routeSeatId, int ticketTypeId, double distance)
     {
-        //var stops = await _unitOfWork.CallProcedureAsync<RouteStopTicketDto>
-        //   ("getRoutesByLocalityIdFromAndToWithDate", fromLocalityId, toLocalityId, date);
-
         var totalPrice = await _unitOfWork.CallFunctionAsync<double>("calculateTotalPrice", routeSeatId, ticketTypeId, distance);
 
         return totalPrice;

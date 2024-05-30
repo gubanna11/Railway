@@ -9,31 +9,31 @@ import { UserStoreService } from '../../services/user-store.service';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit {
   public isUserAuthenticated!: boolean;
-  Roles =  Roles;
+  Roles = Roles;
   role?: string;
 
   constructor(public authService: AuthService,
     private router: Router,
     private userStoreService: UserStoreService,
-    ){  
-    }
+  ) {
+  }
 
   ngOnInit(): void {
-     this.isUserAuthenticated = this.authService.isAuthenticated();
-      
-     this.userStoreService.getRoleFromStore()
-      .subscribe(role => {
-        const roleFromToken = this.authService.getRoleFromToken();  
+    this.isUserAuthenticated = this.authService.isAuthenticated();
 
-        this.role = role || roleFromToken;        
+    this.userStoreService.getRoleFromStore()
+      .subscribe(role => {
+        const roleFromToken = this.authService.getRoleFromToken();
+
+        this.role = role || roleFromToken;
       })
 
-      this.authService.authChanged
+    this.authService.authChanged
       .subscribe(res => {
-        
-         this.isUserAuthenticated = res;
+
+        this.isUserAuthenticated = res;
       });
   }
 

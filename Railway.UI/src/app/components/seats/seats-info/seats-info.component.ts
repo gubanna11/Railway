@@ -10,6 +10,7 @@ import { CreateTicketDto } from '../../../models/tickets/createTicketDto';
 import { OptionDto } from '../../../models/options/optionDto';
 import { AuthService } from '../../../services/auth.service';
 import { OptionsService } from '../../../services/options.service';
+import * as toastr from 'toastr';
 
 @Component({
   selector: 'app-seats-info',
@@ -39,7 +40,7 @@ export class SeatsInfoComponent implements OnInit {
     this.stop = history.state.stop;
     this.selectedCoachTypeId = history.state.coachTypeId;
     this.date = history.state.date;
-console.log(this.stop);
+    console.log(this.stop);
 
     this.routeSeatsService.getRouteSeatsByCoachTypeId(this.stop!.routeId!, this.date!.toLocaleDateString(),
       this.selectedCoachTypeId!)
@@ -77,14 +78,14 @@ console.log(this.stop);
       });
 
 
-      this.optionsService.getOptions().subscribe({
-        next: (result: OptionDto[]) => {
-          this.options = result;
-        }
-      })
+    this.optionsService.getOptions().subscribe({
+      next: (result: OptionDto[]) => {
+        this.options = result;
+      }
+    })
 
-//TODO
-      //this.authService.get  this.ticket.userId = 
+    //TODO
+    //this.authService.get  this.ticket.userId = 
     // this.coaches = this.stop?.details?.find(d => d.coachTypeId == this.selectedCoachTypeId)!.coaches;
 
   }
@@ -96,7 +97,7 @@ console.log(this.stop);
   changeCoachType(detail: RouteStopTicketDetailDto) {
     this.ticket.totalPrice = undefined;
     this.selectedCoachTypeId = detail.coachTypeId;
-    
+
     this.getRouteSeats();
   }
 
@@ -138,23 +139,25 @@ console.log(this.stop);
     this.ticket.userId = "";
     this.ticket.routeSeatId = seat.routeSeatId;
     this.ticket.ticketTypeId = 1;
-    
+
     this.calculateTotalPrice(this.selectedSeat.routeSeatId!, this.ticket.ticketTypeId, this.stop?.distance!);
   }
 
-  addTicket(){
+  addTicket() {
     this.ticket.distance = this.stop?.distance;
     this.ticket.userId = this.authService.getIdFromToken();
-    
+
     this.ticketsService.add(this.ticket)
-    .subscribe({
-      next: () => {
-        this.router.navigate(['/my-tickets']);
-      },
-      error: (err) => {
-        console.log(err);        
-      },
-    });
+      .subscribe({
+        next: () => {
+          toastr.success('Ticket was added!', 'SUCCESS', { timeOut: 5000 });
+          this.router.navigate(['/my-tickets']);
+        },
+        error: (err) => {
+          toastr.error('', 'Error', { timeOut: 5000 });
+          console.log(err);
+        },
+      });
   }
 
   private calculateTotalPrice(routeSeatId: number, ticketTypeId: number, distance: number) {
@@ -166,7 +169,7 @@ console.log(this.stop);
           this.ticket.totalPrice = price;
           for (let option of this.selectedOptions!) {
             this.ticket.totalPrice! += option.extraCharge!;
-          }          
+          }
         },
         error: (err) => {
           console.log(err);

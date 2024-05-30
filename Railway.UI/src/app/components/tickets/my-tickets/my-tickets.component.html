@@ -1,1 +1,6 @@
-<p>my-tickets works!</p>
+<div *ngFor="let ticket of tickets" style="display: flex; gap: 20px">
+    <div> {{ ticket.date | date}}</div>
+    <div> {{ ticket.fromName }}</div>
+    <div> {{ ticket.toName }}</div>
+    <div> {{ ticket.totalPrice | currency }}</div>
+</div>

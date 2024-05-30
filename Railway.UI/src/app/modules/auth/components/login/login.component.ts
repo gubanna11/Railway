@@ -6,6 +6,7 @@ import { UserForAuthDto } from '../../../../models/user/auth/userForAuthDto';
 import { AuthResponseDto } from '../../../../models/user/auth/authResponseDto';
 import { HttpErrorResponse } from '@angular/common/http';
 import ValidateForm from '../../../../helpers/valdiateForm';
+import * as toastr from 'toastr';
 
 @Component({
   selector: 'app-login',
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
           next: (res: AuthResponseDto) => {
             localStorage.setItem("token", res.token);
             this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+            toastr.success('', 'SUCCESS', { timeOut: 5000 });
             this.router.navigate([this.returnUrl]);
           },
           error: (err: HttpErrorResponse) => {
