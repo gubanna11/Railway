@@ -6,6 +6,7 @@ import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import ValidateForm from '../../../../helpers/valdiateForm';
+import * as toastr from 'toastr';
 
 @Component({
   selector: 'app-register',
@@ -45,7 +46,10 @@ export class RegisterComponent implements OnInit {
       };
 
       this.authService.register(user).subscribe({
-        next: () => this.router.navigate(["/auth/login"]),
+        next: () => {
+          toastr.success('You registered successfully!', 'SUCCESS', { timeOut: 5000 });
+          this.router.navigate(["/auth/login"])
+        },
         error: (err: HttpErrorResponse) => {
           console.log(err)
           this.errorMessage = err.message;

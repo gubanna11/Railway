@@ -62,7 +62,11 @@ public class DataProfile : Profile
                Id = o.OptionId,
                ExtraCharge = o.Option.ExtraCharge,
                Name = o.Option.Name,
-           })));
+           })))
+           .ForMember(dest => dest.FromName, s => s.MapFrom(s => s.FromRouteStop.StationTrack.Station.Locality.Name
+            + " " + s.FromRouteStop.StationTrack.Station.Name))
+           .ForMember(dest => dest.ToName, s => s.MapFrom(s => s.ToRouteStop.StationTrack.Station.Locality.Name
+            + " " + s.ToRouteStop.StationTrack.Station.Name));
 
         CreateMap<TicketOptionDto, TicketOption>()
             .ReverseMap();

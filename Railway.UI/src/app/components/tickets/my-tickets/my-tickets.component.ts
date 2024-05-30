@@ -23,13 +23,10 @@ export class MyTicketsComponent implements OnInit{
     .subscribe(id => {
       const idFromToken = this.authService.getIdFromToken();
       this.userId = id || idFromToken;
-      console.log(this.userId);
       
       this.ticketsService.getByUserId(this.userId!)
       .subscribe({
-        next: (result: TicketDto[]) => {
-          console.log(result);
-          
+        next: (result: TicketDto[]) => {          
           this.tickets = result;
         },
         error: (err) => {

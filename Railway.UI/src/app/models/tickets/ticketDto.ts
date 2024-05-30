@@ -5,7 +5,10 @@ export class TicketDto {
     userId?: string;
 
     fromStationTrackId?: number;
+    fromName?: string;
+
     toStationTrackId?: number;
+    toName?: string;
 
     routeSeatId?: number;
 
