@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Railway.Core.Entities;
+﻿namespace Railway.Core.Entities;
 
 public class TrainType : BaseEntity
 {
     public string Name { get; set; }
+
+    public string ImgUrl { get; set; }
 
     public ICollection<Train> Trains { get; set; }
 

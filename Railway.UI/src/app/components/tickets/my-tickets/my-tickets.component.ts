@@ -9,30 +9,30 @@ import { UserStoreService } from '../../../services/user-store.service';
   templateUrl: './my-tickets.component.html',
   styleUrl: './my-tickets.component.css'
 })
-export class MyTicketsComponent implements OnInit{
-  tickets?: TicketDto[];
+export class MyTicketsComponent implements OnInit {
+  tickets: TicketDto[] = [];
   userId?: string;
 
   constructor(private ticketsService: TicketsService,
     private authService: AuthService,
     private userStoreService: UserStoreService,
-  ){}
+  ) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
     this.userStoreService.getIdFromStore()
-    .subscribe(id => {
-      const idFromToken = this.authService.getIdFromToken();
-      this.userId = id || idFromToken;
-      
-      this.ticketsService.getByUserId(this.userId!)
-      .subscribe({
-        next: (result: TicketDto[]) => {          
-          this.tickets = result;
-        },
-        error: (err) => {
-          console.log(err);        
-        },
+      .subscribe(id => {
+        const idFromToken = this.authService.getIdFromToken();
+        this.userId = id || idFromToken;
+
+        this.ticketsService.getByUserId(this.userId!)
+          .subscribe({
+            next: (result: TicketDto[]) => {
+              this.tickets = result;
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          })
       })
-    })   
   }
 }

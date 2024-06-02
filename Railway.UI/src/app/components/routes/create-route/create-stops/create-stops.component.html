@@ -1,7 +1,12 @@
 <button (click)="addNewStop()">+</button>
 <div *ngFor="let stop of stops; let i = index">
 
-    <app-stop [stop]="stop" (addStop)="setRouteStop($event, i)"></app-stop>    
+    <mat-chip>
+        {{stop.order}}
+    </mat-chip>
+    
+    <app-stop [stop]="stop" (addStop)="setRouteStop($event, i)"></app-stop>
+
 
     <div *ngIf="i > 0">
         <label>Arrival time: </label>

@@ -2,6 +2,31 @@
     padding: 12px 18px;
 } */
 
+.train-types{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.train-types img{
+    height: 100px;
+}
+
+.trains{
+    display: flex;
+    gap: 8px;
+}
+
+
+.form-label{
+    margin-right: 12px;
+}
+
+.from_to{
+    margin-top: 20px;
+}
+
 .active{
     border: 4px solid #000;
 }
@@ -13,3 +38,4 @@
 .child-station-dropdown{
     display: flex;
 }
+
