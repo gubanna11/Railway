@@ -8,6 +8,7 @@ import { TrainTypesService } from '../../../services/train-types.service';
 import { CoachTypeDto } from '../../../models/coachTypes/coachTypeDto';
 import { ScheduleDto } from '../../../models/schedule/scheduleDto';
 import { FrequencyEnum } from '../../../models/enums/frequencyEnum';
+import * as toastr from 'toastr';
 
 @Component({
   selector: 'app-create-route',
@@ -48,7 +49,11 @@ export class CreateRouteComponent implements OnInit {
 
   setTrainType(trainType: TrainTypeDto) {
     if (this.selectedType == trainType) {
-      this.selectedType = null;
+      this.selectedType = undefined;
+      this.trains = [];
+      this.coachTypes = [];
+      this.createRouteDto.routeDetails = [];
+      return;
     } else {
       this.selectedType = trainType;
     }
@@ -71,7 +76,8 @@ export class CreateRouteComponent implements OnInit {
             this.trains = trains;
           },
           error: (err) => {
-            console.log(err);
+            console.log(err);            
+            toastr.error('', err.error, {timeOut: 5000});
           }
         }
       )
@@ -148,7 +154,7 @@ export class CreateRouteComponent implements OnInit {
       this.isRouteStops = true;
     else
       //toastr
-      console.log('SELECT FROM AND TO');
+      toastr.warning('Select from and to stations', '', {timeOut: 50000});
   }
 
   // setStops(event: CreateRouteStopDto[]){

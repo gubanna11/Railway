@@ -5,7 +5,7 @@
   
     <mat-form-field>
       <mat-label>Choose a date</mat-label>
-      <input [(ngModel)]="date" matInput [matDatepicker]="picker">
+      <input [(ngModel)]="date" matInput [matDatepicker]="picker" [min]="date">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

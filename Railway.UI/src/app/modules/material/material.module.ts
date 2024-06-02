@@ -6,7 +6,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatChipsModule} from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';;
 import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
@@ -19,7 +21,11 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     MatSelectModule,
     MatMenuModule,
     MatButtonModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule,
+    MatTableModule,
   ],
   imports: [
     CommonModule

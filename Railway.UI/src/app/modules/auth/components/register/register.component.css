@@ -1,0 +1,29 @@
+.form-auth {
+    max-width: 600px;
+    
+    margin: 20px auto;  
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .input-field {
+    width: 100%;
+  }
+  
+
+  input {
+    width: 100%;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .form-title{
+    text-align: center;
+  }
+  

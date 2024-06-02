@@ -1,6 +1,29 @@
-<div *ngFor="let ticket of tickets" style="display: flex; gap: 20px">
-    <div> {{ ticket.date | date}}</div>
-    <div> {{ ticket.fromName }}</div>
-    <div> {{ ticket.toName }}</div>
-    <div> {{ ticket.totalPrice | currency }}</div>
+<div *ngIf="tickets?.length == 0" style="text-align: center; font-size: 20px;margin-top: 40px;">
+    <p>Empty!</p>
 </div>
+
+<mat-table *ngIf="tickets.length > 0" [dataSource]="tickets" class="tickets-table">
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ ticket.date | date }}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="from">
+      <mat-header-cell *matHeaderCellDef>From</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ ticket.fromName }}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="to">
+      <mat-header-cell *matHeaderCellDef>To</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ ticket.toName }}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="totalPrice">
+      <mat-header-cell *matHeaderCellDef>Total Price</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ ticket.totalPrice | currency }}</mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="['date', 'from', 'to', 'totalPrice']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['date', 'from', 'to', 'totalPrice']"></mat-row>
+  </mat-table>
+  

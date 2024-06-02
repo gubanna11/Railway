@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LocalityDto } from '../../../models/localities/localityDto';
-import { FormControl } from '@angular/forms';
 import { RouteStopTicketDto } from '../../../models/procedures/routeSearch/routeStopTicketDto';
 import { RouteStopsService } from '../../../services/route-stops.service';
 import { RouteSeatsService } from '../../../services/route-seats.service';
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class CreateTicketComponent {
   fromLocality?: LocalityDto;
   toLocality?: LocalityDto;
-  date?: Date;
+  date?: Date = new Date();
   routeStops?: RouteStopTicketDto[];
 
   constructor(
@@ -42,8 +41,6 @@ export class CreateTicketComponent {
       .subscribe({
         next: (res) => {
           this.routeStops = res;
-          console.log(res);
-
         },
         error: (err) => {
           console.log(err);

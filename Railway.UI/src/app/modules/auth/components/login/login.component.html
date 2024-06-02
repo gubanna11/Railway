@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="form-auth">
+<!-- <form [formGroup]="loginForm" class="form-auth">
     <div>
         <input formControlName="userName" type="text" placeholder="User name">
         <p *ngIf="loginForm.controls['userName'].dirty && loginForm.hasError('required', 'userName')">
@@ -17,4 +17,36 @@
         Don't have an account?
         <a routerLink="/auth/register">Sign Up</a>
     </div>
-</form>
+</form> -->
+
+
+<form [formGroup]="loginForm" class="form-auth">
+    <h1 class="form-title">Login</h1>
+    <div>
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>User name</mat-label>
+        <input matInput formControlName="userName" type="text" placeholder="User name">
+        <mat-error *ngIf="loginForm.controls['userName'].dirty && loginForm.hasError('required', 'userName')">
+          *User Name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div>
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Password">
+        <mat-error *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')">
+          *Password is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <button mat-raised-button color="primary" (click)="onLogin(loginForm.value)" type="submit" class="btn">Login</button>
+    
+    <div class="form-footer">
+      Don't have an account?
+      <a routerLink="/auth/register">Sign Up</a>
+    </div>
+  </form>
+  
