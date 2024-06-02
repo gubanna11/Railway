@@ -4,8 +4,6 @@
             <p>Train types:</p>
             <div class="train-types">
                 <div *ngFor="let type of trainTypes">
-                    <!-- <p (click)="setTrainType(type)" style="cursor: pointer;" [class.active]="selectedType == type">{{type.name}}</p> -->
-
                     <img [src]="type.imgUrl" (click)="setTrainType(type)" style="cursor: pointer;"
                         [class.active]="selectedType == type" alt="">
                 </div>
@@ -25,10 +23,6 @@
                 </div>
             </div>
             <div style="display: flex; gap: 24px" *ngFor="let detail of createRouteDto.routeDetails; let i = index">
-                <!-- <div>
-                    <label>{{coachTypes![i].name}} amount</label>
-                    <input type="number" [(ngModel)]="detail.coachesAmount">
-                </div> -->
                 <div>
                     <label class="form-label">{{coachTypes![i].name}}</label>
                     <mat-form-field appearance="fill" class="full-width">
@@ -105,7 +99,6 @@
             </div>
 
             <button mat-flat-button color="primary" type="submit" (click)="createRoute()">Create</button>
-            <!-- <button type="submit" (click)="createRoute()">submit</button> -->
         </div>
 
 

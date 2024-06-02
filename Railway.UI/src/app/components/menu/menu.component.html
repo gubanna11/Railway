@@ -17,15 +17,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul *ngIf="!isUserAuthenticated" style="display: flex; gap: 20px">
       <li class="nav-item">
-        <!-- <a class="nav-link" [routerLink]="['/auth/register']" routerLinkActive="active" 
-              [routerLinkActiveOptions]="{exact: true}">Register</a>
-               -->
         <button mat-stroked-button color="primary" [routerLink]="['/auth/register']" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}">Register</button>
       </li>
       <li class="nav-item">
-        <!-- <a class="nav-link" [routerLink]="['/auth/login']" routerLinkActive="active" 
-              [routerLinkActiveOptions]="{exact: true}">Login</a>               -->
         <button mat-flat-button color="primary" [routerLink]="['/auth/login']" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}">Login</button>
       </li>
@@ -34,7 +29,6 @@
 
     <ul *ngIf="isUserAuthenticated">
       <li *ngIf="isUserAuthenticated" class="nav-item">
-        <!-- <a class="nav-link" routerLink="" (click)="logout()">Logout</a> -->
         <button mat-stroked-button color="primary" routerLink="" (click)="logout()">Logout</button>
       </li>
     </ul>
