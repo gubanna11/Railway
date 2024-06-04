@@ -12,6 +12,7 @@ import { UserStoreService } from '../../../services/user-store.service';
 export class MyTicketsComponent implements OnInit {
   tickets: TicketDto[] = [];
   userId?: string;
+  isEmpty: boolean = true;
 
   constructor(private ticketsService: TicketsService,
     private authService: AuthService,
@@ -28,6 +29,9 @@ export class MyTicketsComponent implements OnInit {
           .subscribe({
             next: (result: TicketDto[]) => {
               this.tickets = result;
+              if(result.length > 0){
+                this.isEmpty = false;
+              }
             },
             error: (err) => {
               console.log(err);

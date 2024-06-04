@@ -74,3 +74,9 @@
      background: none;
  }
  
+ .title{
+    font-size: 28px;
+    text-align: center;
+    font-weight: 700;
+    margin: 20px 0px !important;
+ }
