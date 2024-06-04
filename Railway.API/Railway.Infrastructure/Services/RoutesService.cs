@@ -24,7 +24,7 @@ public class RoutesService : IRoutesService
     public async Task<RouteDto> AddAsync(CreateRouteDto createRouteDto)
     {
         Route route = _mapper.Map<Route>(createRouteDto);
-        
+
         await _unitOfWork.GenericRepository.AddAsync(route);
         await _unitOfWork.SaveAsync();
 
@@ -35,11 +35,14 @@ public class RoutesService : IRoutesService
             await _unitOfWork.GetGenericRepository<RouteDetail>().AddAsync(newDetail);
         }
 
-        foreach (var stop in createRouteDto.RouteStops)
+        if (createRouteDto.RouteStops != null)
         {
-            var newStop = _mapper.Map<RouteStop>(stop);
-            newStop.RouteId = route.Id;
-            await _unitOfWork.GetGenericRepository<RouteStop>().AddAsync(newStop);
+            foreach (var stop in createRouteDto.RouteStops)
+            {
+                var newStop = _mapper.Map<RouteStop>(stop);
+                newStop.RouteId = route.Id;
+                await _unitOfWork.GetGenericRepository<RouteStop>().AddAsync(newStop);
+            }
         }
 
         foreach (var frequency in createRouteDto.Schedule.Frequencies)
@@ -49,7 +52,7 @@ public class RoutesService : IRoutesService
                 RouteId = route.Id,
                 Frequency = frequency
             };
-            
+
             await _unitOfWork.GetGenericRepository<Schedule>().AddAsync(schedule);
         }
 

@@ -25,25 +25,26 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   }
 
   private handleError = (error: HttpErrorResponse): string | undefined => {
-    if (error.status === 404) {
-      return this.handleNotFound(error);
-    }
-    else if (error.status === 400) {
+    // if (error.status === 404) {
+    //   return this.handleNotFound(error);
+    // }
+    if (error.status === 400) {
       return this.handleBadRequest(error);
     }
     else if (error.status === 401) {
       return this.handleUnauthorized(error);
     }
     else if (error.status === 403) {
-      return this.handleForbidden(error);
+      //return this.handleForbidden(error);
+      return this.handleUnauthorized(error);
     }
     return undefined;
   }
 
-  private handleNotFound = (error: HttpErrorResponse): string => {
-    this.router.navigate(['/404']);
-    return error.message;
-  }
+  // private handleNotFound = (error: HttpErrorResponse): string => {
+  //   this.router.navigate(['/404']);
+  //   return error.message;
+  // }
 
   private handleBadRequest = (error: HttpErrorResponse): string => {
     if (this.router.url === '/auth/register') {
@@ -73,8 +74,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     }
   }
 
-  private handleForbidden = (error: HttpErrorResponse) => {
-    this.router.navigate(["/forbidden"], { queryParams: { returnUrl: this.router.url } });
-    return "Forbidden";
-  }
+  // private handleForbidden = (error: HttpErrorResponse) => {
+  //   this.router.navigate(["/forbidden"], { queryParams: { returnUrl: this.router.url } });
+  //   return "Forbidden";
+  // }
 }

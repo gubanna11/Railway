@@ -9,6 +9,7 @@ import { CoachTypeDto } from '../../../models/coachTypes/coachTypeDto';
 import { ScheduleDto } from '../../../models/schedule/scheduleDto';
 import { FrequencyEnum } from '../../../models/enums/frequencyEnum';
 import * as toastr from 'toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-route',
@@ -16,7 +17,7 @@ import * as toastr from 'toastr';
   styleUrl: './create-route.component.css'
 })
 export class CreateRouteComponent implements OnInit {
-  id: string = 's';
+  id?: string;
   createRouteDto!: CreateRouteDto;
   trainTypes?: TrainTypeDto[];
   trains?: TrainDto[];
@@ -31,6 +32,7 @@ export class CreateRouteComponent implements OnInit {
   constructor(private routeService: RoutesService,
     private trainService: TrainsService,
     private trainTypesService: TrainTypesService,
+    private router: Router,
   ) {
   }
 
@@ -76,8 +78,8 @@ export class CreateRouteComponent implements OnInit {
             this.trains = trains;
           },
           error: (err) => {
-            console.log(err);            
-            toastr.error('', err.error, {timeOut: 5000});
+            console.log(err);
+            toastr.error('', err.error, { timeOut: 5000 });
           }
         }
       )
@@ -91,8 +93,9 @@ export class CreateRouteComponent implements OnInit {
   createRoute() {
     this.routeService.add(this.createRouteDto)
       .subscribe({
-        next: (route) => {
-          console.log(route);
+        next: (result) => {
+          toastr.success( result.message, 'SUCCESS', { timeOut: 5000 });
+          this.navigateToHome();
         },
         error: (err) => {
           console.log(err);
@@ -153,8 +156,7 @@ export class CreateRouteComponent implements OnInit {
     if (this.createRouteDto.toStationTrackId && this.createRouteDto.fromStationTrackId)
       this.isRouteStops = true;
     else
-      //toastr
-      toastr.warning('Select from and to stations', '', {timeOut: 50000});
+      toastr.warning('Select from and to stations', '', { timeOut: 50000 });
   }
 
   // setStops(event: CreateRouteStopDto[]){
@@ -167,6 +169,6 @@ export class CreateRouteComponent implements OnInit {
   }
 
   navigateToHome() {
-    //toast success
+    this.router.navigate(['/']);
   }
 }

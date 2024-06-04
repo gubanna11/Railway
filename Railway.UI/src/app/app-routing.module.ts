@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)},
   { path: 'routes/create', component: CreateRouteComponent, canActivate: [AdminGuard]},
-  { path: 'tickets/book', component: CreateTicketComponent },
+  { path: 'tickets/book', component: CreateTicketComponent, canActivate: [AuthGuard]  },
   { path: 'seats', component: SeatsInfoComponent },
   { path: 'my-tickets', component: MyTicketsComponent, canActivate: [AuthGuard] },
 ];

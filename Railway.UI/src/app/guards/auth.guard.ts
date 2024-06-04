@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService,
     private router: Router,
     ){
-      //toastr.options.timeOut = 30000;      
+      //toastr.options.timeOut = 3000;      
   }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -19,8 +19,6 @@ export class AuthGuard implements CanActivate {
       return true;
     }      
 
-    console.log(state.url);
-    
     //toastr.error('Log in', 'Error', {timeOut: 5000});
     this.router.navigate(['login'], { queryParams: {returnUrl: state.url}});
     return false;

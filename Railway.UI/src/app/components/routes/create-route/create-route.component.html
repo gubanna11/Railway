@@ -26,7 +26,7 @@
                 <div>
                     <label class="form-label">{{coachTypes![i].name}}</label>
                     <mat-form-field appearance="fill" class="full-width">
-                        <mat-label class="form-label">Seats amount</mat-label>
+                        <mat-label class="form-label">Coaches amount</mat-label>
                         <input matInput type="number" [(ngModel)]="detail.coachesAmount">
                     </mat-form-field>
                 </div>
@@ -95,7 +95,7 @@
 
             <div style="display: flex; gap: 12px; margin: 20px 0px">
                 <div (click)="showRouteStops()" style="cursor: pointer;">Add route stops</div>
-                <div (click)="navigateToHome()" style="font-weight: bold;">Skip</div>
+                <!-- <div (click)="navigateToHome()" style="font-weight: bold;">Skip</div> -->
             </div>
 
             <button mat-flat-button color="primary" type="submit" (click)="createRoute()">Create</button>

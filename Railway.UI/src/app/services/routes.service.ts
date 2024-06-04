@@ -12,7 +12,7 @@ export class RoutesService {
 
   constructor(private http: HttpClient) { }
 
-  public add(routeDto: RouteDto): Observable<RouteDto> {
+  public add(routeDto: RouteDto): Observable<any> {
     return this.http.post(`${environment.apiUrl}/${this.url}`, routeDto);
   }
 
