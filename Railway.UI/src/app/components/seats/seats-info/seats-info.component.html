@@ -1,7 +1,7 @@
 <div *ngFor="let detail of stop!.details">
     <div (click)="changeCoachType(detail)" class="detail" [class.active]="selectedCoachTypeId == detail.coachTypeId">
         <p>{{ detail.coachTypeName }}</p>
-        <p>{{ detail.seatsAvailableAmount }} </p>s
+        <p>{{ detail.seatsAvailableAmount }} </p>
     </div>
 </div>
 
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<p>{{ ticket.totalPrice }}</p>
+<p style="margin: 20px 10px">Price: {{ ticket.totalPrice |currency }}</p>
 
 <mat-form-field>
     <mat-select placeholder="Select options" [(ngModel)]="selectedOptions" multiple

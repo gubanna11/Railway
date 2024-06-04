@@ -2,7 +2,7 @@
   <div class="ticket">
     <app-localities [isShown]="false" (selectedLocality)="setFromLocality($event)"></app-localities>
     <app-localities [isShown]="false" (selectedLocality)="setToLocality($event)"></app-localities>
-  
+
     <mat-form-field>
       <mat-label>Choose a date</mat-label>
       <input [(ngModel)]="date" matInput [matDatepicker]="picker" [min]="date">
@@ -10,20 +10,26 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  
+
     <button mat-flat-button color="primary" (click)="searchRoutes()">Search</button>
   </div>
-  
-  <div>
-    <div *ngFor="let stop of routeStops" style="display: flex; gap:16px">
+
+ <div class="stops">
+    <div *ngFor="let stop of routeStops" class="stop">
+      <div class="route-info">
         <p (click)="navigateToRouteDetails(stop.routeId)">{{ stop.routeId }}</p>
         <p>{{ stop.routeFromLocality }}</p>
         <p>{{ stop.routeToLocality }}</p>
-        <div *ngFor="let detail of stop.details" style="display: flex;">
-            <p>{{ detail.coachTypeName }}</p>
-            <p>{{ detail.seatsAvailableAmount }}</p>
-            <button mat-flat-button color="primary" (click)="getSeatsByCoachTypeId(stop, stop.routeId!, detail.coachTypeId!)">Choose</button>
+      </div>
+      <div class="stops-details">
+        <div class="detail" *ngFor="let detail of stop.details" style="display: flex;">
+          <p style="width: 100px;">{{ detail.coachTypeName }}</p>
+          <p>{{ detail.seatsAvailableAmount }}</p>
+          <p>{{ detail.price | currency}}</p>
+          <button mat-flat-button color="primary"
+            (click)="getSeatsByCoachTypeId(stop, stop.routeId!, detail.coachTypeId!)">Choose</button>
         </div>
+      </div>
     </div>
-  </div>  
+  </div>
 </div>
