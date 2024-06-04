@@ -1,0 +1,32 @@
+<div *ngFor="let detail of stop!.details">
+    <div (click)="changeCoachType(detail)" class="detail" [class.active]="selectedCoachTypeId == detail.coachTypeId">
+        <p>{{ detail.coachTypeName }}</p>
+        <p>{{ detail.seatsAvailableAmount }} </p>
+    </div>
+</div>
+
+<div class="coaches">
+    <div *ngFor="let coach of coaches" class="coach">
+        <p (click)="chooseCoachNumber(coach)">{{ coach.coachNumber }}</p>
+    </div>
+</div>
+
+
+<div class="seats">
+    <div *ngFor="let seat of selectedCoach?.seats" class="seat" [class.chosen]="seat == selectedSeat" [class.active]="seat.isAvailable == true">
+        <p (click)="chooseSeat(seat)">{{ seat.seatNumber }}</p>
+    </div>
+</div>
+
+<p style="margin: 20px 10px">Price: {{ ticket.totalPrice |currency }}</p>
+
+<mat-form-field>
+    <mat-select placeholder="Select options" [(ngModel)]="selectedOptions" multiple
+        (selectionChange)="optionChanged()">
+        <mat-option *ngFor="let frequency of options" [value]="frequency">
+            {{ frequency.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<button mat-flat-button color="primary" (click)="addTicket()">Book</button>

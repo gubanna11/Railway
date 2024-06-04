@@ -1,0 +1,63 @@
+<form [formGroup]="registerForm" class="form-auth">
+  <h1 class="form-title">Sign up</h1>
+  <div>
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" type="text" placeholder="First name">
+      <mat-error *ngIf="registerForm.controls['firstName'].dirty && registerForm.hasError('required', 'firstName')">
+        *First Name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" type="text" placeholder="Last name">
+      <mat-error *ngIf="registerForm.controls['lastName'].dirty && registerForm.hasError('required', 'lastName')">
+        *Last Name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="text" placeholder="Email"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+      <mat-error *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('required', 'email')">
+        *Email is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].errors?.['pattern']">
+        example&#64;example.example
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>New Password</mat-label>
+      <input matInput formControlName="password" type="password" placeholder="New Password">
+      <mat-error *ngIf="registerForm.controls['password'].dirty && registerForm.hasError('required', 'password')">
+        *Password is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm Password">
+      <mat-error
+        *ngIf="registerForm.controls['confirmPassword'].dirty && registerForm.hasError('required', 'confirmPassword')">
+        *Confirm Password is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.hasError('confirmPasswordValidator', 'confirmPassword')">
+        *Password doesn't match
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="registerUser(registerForm.value)" type="submit" class="btn">Sign
+    up</button>
+</form>

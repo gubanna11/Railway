@@ -1,0 +1,19 @@
+<div class="child-station-dropdown">
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Station</mat-label>
+      <input type="text" matInput [formControl]="stationControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLocality"
+        (optionSelected)="stationSelected($event)">
+        <mat-option *ngFor="let option of filteredStations | async" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <!-- TRACKS -->
+  <app-station-tracks [selectedStationTrack]="selectedStationTrack" [stationTracks]="stationTracks" (setStationTrack)="trackSelected($event)"></app-station-tracks>
+
+</div>

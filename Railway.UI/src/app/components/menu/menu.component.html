@@ -1,0 +1,36 @@
+<div style="display: flex; justify-content: space-around;">
+  <div>
+    <a style="color:rgb(27, 26, 26); font-size: 20px;" routerLink="/">Railway</a>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" routerLink="tickets/book">Book a ticket</button>
+  </div>
+  <div *ngIf="isUserAuthenticated">
+    <button mat-flat-button routerLink="my-tickets">My tickets</button>
+  </div>
+  <div *ngIf="isUserAuthenticated && role == Roles.Admin">
+    <button mat-button [matMenuTriggerFor]="menu">Admin</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="routes/create">Create route</button>
+    </mat-menu>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul *ngIf="!isUserAuthenticated" style="display: flex; gap: 20px">
+      <li class="nav-item">
+        <button mat-stroked-button color="primary" [routerLink]="['/auth/register']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">Register</button>
+      </li>
+      <li class="nav-item">
+        <button mat-flat-button color="primary" [routerLink]="['/auth/login']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">Login</button>
+      </li>
+    </ul>
+
+
+    <ul *ngIf="isUserAuthenticated">
+      <li *ngIf="isUserAuthenticated" class="nav-item">
+        <button mat-stroked-button color="primary" routerLink="" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</div>
